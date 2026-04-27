@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build":  "react-scripts build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -26,5 +26,10 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
     "vite": "^8.0.10"
-  }
+  },
+  
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
 }
+
