@@ -493,5 +493,5 @@ footer {
   color: white;
   text-align: center;
   padding: 15px;
-  margin-top: auto;    /* empurra o footer para o final da página */
+  margin-top: 20px;    /* empurra o footer para o final da página */
 }
