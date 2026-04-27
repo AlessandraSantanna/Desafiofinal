@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+ 
+  <title>SOS Enchentes</title>
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+   body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.card {
+  width: 50%;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  align-items: center;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.alta { background: #f3240d; color: black }
+.media { background: #f1c40f; color: black; }
+.baixa { background: #2ecc71; color: black; }
+
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+</style>
+  <h1>🚨 SOS Enchentes</h1>
+
+  <button onclick="carregarPedidos()">📋 Ver Pedidos</button>
+  <button onclick="carregarStats()">📊 Dashboard</button>
+
+  <div id="pedidos"></div>
+
+  <div class="dashboard" id="stats"></div>
+  <h2>🆘 Preciso de ajuda</h2>
+
+<form id="formPedido">
+  <input type="text" id="nome" placeholder="Nome" required><br><br>
+
+  <input type="number" id="idade" placeholder="Idade" required><br><br>
+
+  <select id="tipo">
+    <option value="resgate">Resgate</option>
+    <option value="alimentacao">Alimentação</option>
+    <option value="abrigo">Abrigo</option>
+  </select><br><br>
+
+  <textarea id="descricao" placeholder="Descreva a situação"></textarea><br><br>
+
+  <label>
+    <input type="checkbox" id="tem_animal"> Tem animal
+  </label><br><br>
+
+  <input type="text" id="bairro" placeholder="Bairro" required><br><br>
+
+  <button type="submit">Enviar pedido</button>
+</form>
+
+<hr>
+
+  <script>
+    function agruparPorBairro(pedidos) {
+  return pedidos.reduce((acc, p) => {
+    if (!acc[p.bairro]) acc[p.bairro] = [];
+    acc[p.bairro].push(p);
+    return acc;
+  }, {});
+}
+async function carregarPedidos() {
+  const res = await fetch("http://localhost:3000/pedidos");
+  const data = await res.json();
+
+  const container = document.getElementById("pedidos");
+  container.innerHTML = "";
+
+  data.forEach(p => {
+    const div = document.createElement("div");
+
+    // muda cor se resolvido
+    div.className = `card ${p.prioridade}`;
+    if (p.status === "resolvido") {
+      div.style.opacity = "0.6";
+    }
+
+    div.innerHTML = `
+      <strong>${p.nome}</strong><br>
+      Idade: ${p.idade}<br>
+      Tipo: ${p.tipo}<br>
+      Bairro: ${p.bairro}<br>
+
+      📝 Descrição: ${p.descricao}<br>
+
+      🐾 Animal: ${p.tem_animal ? "Sim" : "Não"}<br>
+
+      🔥 Prioridade: ${p.prioridade}<br>
+      📌 Status: ${p.status}<br>
+
+      🕒 Criado em: ${
+        p.data_criacao 
+          ? new Date(p.data_criacao).toLocaleString() 
+          : "N/A"
+      }<br>
+
+      ${
+        p.data_resolvido
+          ? `✅ Resolvido em: ${new Date(p.data_resolvido).toLocaleString()}`
+          : ""
+      }
+
+      <br><br>
+
+      ${
+        p.status !== "resolvido"
+          ? `<button onclick="resolverPedido(${p.id})">Resolver</button>`
+          : `<span>✔ Já resolvido</span>`
+      }
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+
+document.getElementById("formPedido").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const pedido = {
+    nome: document.getElementById("nome").value,
+    idade: Number(document.getElementById("idade").value),
+    tipo: document.getElementById("tipo").value,
+    descricao: document.getElementById("descricao").value,
+    tem_animal: document.getElementById("tem_animal").checked,
+    bairro: document.getElementById("bairro").value
+  };
+
+  try {
+    const res = await fetch("http://localhost:3000/pedidos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(pedido)
+    });
+
+    const data = await res.json();
+
+    alert("Pedido enviado com sucesso! 🚀");
+
+    document.getElementById("formPedido").reset();
+
+    carregarPedidos(); // atualiza lista automaticamente
+
+  } catch (error) {
+    alert("Erro ao enviar pedido ❌");
+    console.error(error);
+  }
+});
+async function resolverPedido(id) {
+  await fetch(`http://localhost:3000/pedidos/${id}/resolver`, {
+    method: "PATCH"
+  });
+
+  carregarPedidos(); // atualiza lista
+   carregarStats();   // 🔥 atualiza dashboard
+}
+
+async function carregarStats() {
+  const res = await fetch("http://localhost:3000/pedidos/stats");
+  const data = await res.json();
+
+  const stats = document.getElementById("stats");
+
+   stats.innerHTML = `
+    <h2>📊 Dashboard</h2>
+
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+      
+      <div style="background:#3498db; color:white; padding:15px; border-radius:8px;">
+        Total<br><strong>${data.total}</strong>
+      </div>
+
+      <div style="background:#e74c3c; color:white; padding:15px; border-radius:8px;">
+        🔴 Alta<br><strong>${data.alta}</strong>
+      </div>
+
+      <div style="background:#f1c40f; padding:15px; border-radius:8px;">
+        🟡 Média<br><strong>${data.media}</strong>
+      </div>
+
+      <div style="background:#2ecc71; color:white; padding:15px; border-radius:8px;">
+        🟢 Baixa<br><strong>${data.baixa}</strong>
+      </div>
+
+      <div style="background:#2c3e50; color:white; padding:15px; border-radius:8px;">
+        ✅ Resolvidos<br><strong>${data.resolvidos}</strong>
+      </div>
+
+    </div>
+  `;
+carregarStats();
+carregarPedidos();
+}
+
+  </script>
+
+</body>
+</html>
