@@ -477,3 +477,13 @@ color:#000;
 .container-ajuda{
   padding-top: 50px;
 }
+.main-footer {
+  background: #395ab6;   /* cor de fundo */
+  color: white;          /* cor do texto */
+  text-align: center;    /* centraliza o texto */
+  padding: 15px;
+  bottom: 0;             /* gruda no rodapé */
+  left: 0;
+  width: 100%;           /* ocupa toda a largura */
+  font-size: 14px;
+}

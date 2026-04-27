@@ -87,7 +87,10 @@ const navigate = useNavigate();
 
   <select name="tipo" value={form.tipo} onChange={handleChange} className="input-field">
     <option value="resgate">Atender em Resgate</option>
-       <option value="abrigo">Atender em abrigo</option>
+    <option value="abrigo">Atender em abrigo</option>
+     <option value="cozinha">Cozinha </option>
+     <option value="limpeza">Limpeza</option>
+      <option value="socorro"> Primeiros Socorros</option>
   </select><br /><br />
 
  
