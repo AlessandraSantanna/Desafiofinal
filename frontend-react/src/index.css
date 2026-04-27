@@ -92,7 +92,7 @@
 
 .card.baixa .circle,
 .card.baixa .content a {
-  background: #bb02ff;
+  background: #2ecc71;
 }
 
 
@@ -325,7 +325,7 @@ color:#000;
 }
 
 .input-field:focus, .pedido-form select:focus, .pedido-form textarea:focus {
-  outline: 2px solid #9333ea;
+  outline: 2px solid #2ecc71;
 }
 .checkbox-label {
   display: flex;
