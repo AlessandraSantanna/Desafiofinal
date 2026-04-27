@@ -477,13 +477,21 @@ color:#000;
 .container-ajuda{
   padding-top: 50px;
 }
-.main-footer {
-  background: #395ab6;   /* cor de fundo */
-  color: white;          /* cor do texto */
-  text-align: center;    /* centraliza o texto */
+html, body {
+  height: 100%;          /* ocupa toda a altura da tela */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  flex: 1;               /* ocupa todo o espaço disponível */
+}
+
+footer {
+  background: #395ab6;
+  color: white;
+  text-align: center;
   padding: 15px;
-  bottom: 0;             /* gruda no rodapé */
-  left: 0;
-  width: 100%;           /* ocupa toda a largura */
-  font-size: 14px;
+  margin-top: auto;    /* empurra o footer para o final da página */
 }
