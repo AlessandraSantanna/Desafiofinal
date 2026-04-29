@@ -1,32 +1,26 @@
-import { Routes, Route,  } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-
-
 import Home from "./pages/Home";
-
-import DashboardPage from "./pages/DashboardPage";
 import PedidosPage from "./pages/PedidosPage";
-import Oferecer from "./pages/OferecerAjudaPages";
+import LandingPage from "./pages/LandingPage";
+import DashboardPage from "./pages/DashboardPage";
+import VoluntarioPage from "./pages/VoluntarioPage";
+import ListaVoluntariosPage from "./pages/ListaVoluntariosPage";
 
-export default function App() {
+function App() {
   return (
-    <div>
-
-      {/* MENU */}
-      <nav>
-       <Navbar />
-      </nav>
-
-      <hr />
-
-      {/* ROTAS */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-         <Route path="/pedidos" element={<PedidosPage />} />
-           <Route path="/oferecer" element={<Oferecer />} />
-      </Routes>
-
-    </div>
+    <>
+      <Navbar />
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/pedidos" element={<PedidosPage />} />
+       <Route path="/dashboard" element={<DashboardPage />} />
+       <Route path="/voluntario" element={<VoluntarioPage />} />
+      <Route path="/lista-voluntarios" element={<ListaVoluntariosPage />} />
+    </Routes>
+    </>
   );
 }
+
+export default App;

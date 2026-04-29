@@ -26,3 +26,9 @@ export async function resolverPedido(id) {
     method: "PATCH"
   });
 }
+import axios from "axios";
+
+export async function listarVoluntariosPorRegiao() {
+  const res = await axios.get("http://localhost:3000/voluntarios");
+  return res.data;
+}

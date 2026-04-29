@@ -6,6 +6,83 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+color:#000;
+}
+.landing-container {
+  position: relative;
+  height: 100vh;
+  background: url("/enchente.webp") no-repeat center center;
+  background-size: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5); /* fundo desfocado escuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-content {
+  text-align: center;
+  color: #fff;
+  max-width: 700px;
+  padding: 30px;
+}
+
+.landing-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.landing-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.landing-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: #395ab6;
+  color: #fff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(57,90,182,0.3);
+}
+
+.btn-primary:hover {
+  background: #2c468f;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.2);
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -35,70 +112,102 @@
 }
 
 .card {
-  position: relative;
-  width: 300px;
-  height: 420px;
-  background: #fff;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 15px 25px rgba(0,0,0,0.2);
-  transition: 0.5s;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  height: 100%;            /* força ocupar altura total */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* distribui conteúdo */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 16px;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: stretch;
 }
 
-.card .circle {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  clip-path: circle(150px at center 0);
+.pedido-card {
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px;
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  flex: 1;
+  width: 480px;       /* largura fixa */
+  height: 420px;      /* altura fixa */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative; /* para posicionar as pontas coloridas */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* suaviza */
 }
 
-.card .circle h2 {
-  color:  #f3f1f1;
-  font-size: 1.5 em;
-  padding: 30px 0;
-  text-transform: capitalize; /* deixa "alta", "media", "baixa" bonitinho */
-}
-
-.card .content {
+/* pontas coloridas */
+.pedido-card::before {
+  content: "";
   position: absolute;
-  bottom: 10px;
-  padding: 20px;
-  text-align: center;
-  color: #000;
+  top: 0;
+  left: 0;
+  height: 12px;
+  width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
-.card .content a {
+.pedido-card.alta::before { background-color: #dc3545; }   /* vermelho */
+.pedido-card.media::before { background-color: #ffc107; }  /* amarelo */
+.pedido-card.baixa::before { background-color: #28a745; }  /* verde */
+.pedido-card.resolvido::before { background-color: #6f42c1; } /* roxo */
+
+.pedido-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  
+} 
+
+
+/* título */
+.pedido-titulo {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+/* badge */
+.badge {
   display: inline-block;
-  padding: 10px 20px;
-  background: #000;
-  color:  #000;
-  border-radius: 40px;
-  text-decoration: none;
-  margin-top: 20px;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: #eee;
+}
+
+.badge-resgate { background: #f8d7da; }
+.badge-alimentacao { background: #d1ecf1; }
+.badge-abrigo { background: #fff3cd; }
+
+/* botão resolver */
+.resolver-btn {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #28a745;
+  color: white;
   cursor: pointer;
+  font-weight: bold;
 }
-
-/* cores por prioridade */
-.card.alta .circle,
-.card.alta .content a {
-  background: #da2822;
-}
-
-.card.media .circle,
-.card.media .content a {
-  background: #ffaf00;
-}
-
-.card.baixa .circle,
-.card.baixa .content a {
-  background: #2ecc71;
+.resolver-btn:hover {
+  background: #218838;
 }
 
 
-.alta { background: rgb(241, 240, 240); }
-.media { background: rgb(243, 242, 241); }
-.baixa { background: rgb(227, 235, 227); }
 
 form {
   background: white;
@@ -106,30 +215,35 @@ form {
   border-radius: 10px;
   margin-bottom: 20px;
 }
-
+input {
+  width: 100%;
+  max-width: 350px;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
 input, select, textarea {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
 }
 button {
-  margin: 5px;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  background: #3498db;
+  width: 100%;
+  max-width: 350px;
+  padding: 14px;
+  background-color: #395ab6;
   color: white;
-  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
 }
-
 button:hover {
   opacity: 0.8;
 }
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-color:#000;
-}
+
 
 
 /* 🔴 BANNER */
@@ -183,7 +297,7 @@ color:#000;
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background: #395ab6; /* exemplo de cor */
+  background: #547ce9; /* exemplo de cor */
 }
 
 /* Logo container */
@@ -194,7 +308,7 @@ color:#000;
 
 /* Controla o tamanho da logo */
 .logo-img {
-  width: 50px;   /* ajuste conforme necessário */
+  width: 150px;   /* ajuste conforme necessário */
   height: auto;  /* mantém proporção */
 }
 
@@ -226,22 +340,25 @@ color:#000;
     position: absolute;
     top: 60px;
     right: 0;
-    background: #111;
+    background: #547ce9;
     flex-direction: column;
     width: 200px;
-    display: none;
+    display: none;   /* escondido por padrão */
     padding: 10px;
+    z-index: 1;
+  
   }
-
-  .nav-links.active {
+  /* Quando passar o mouse no ícone/menu, mostra */
+  .menu-icon:hover + .nav-links,
+  .navbar:hover .nav-links {
     display: flex;
   }
 
- 
   .menu-icon {
     display: block;
   }
 }
+
 /* ===== Layout principal ===== */
 .home-container {
   display: flex;
@@ -267,6 +384,7 @@ color:#000;
   align-items: center;
   text-align: center;
   color:#000;
+ 
 }
 
 .home-title {
@@ -281,7 +399,7 @@ color:#000;
   max-width: 600px;
   width: 100%;
   border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+ 
 }
 
 /* ===== Responsividade ===== */
@@ -296,90 +414,97 @@ color:#000;
   }
 
   .home-logo {
-    margin-top: 20px;
-    max-width: 250px;
+  
+    max-width: 0px;
   }
 }
+/* formulário pagina inicial*/
+
 .pedido-form {
-  background-color: #395ab6;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 500px;
+  max-width: 400px;
   margin: auto;
-  color: white;
-  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.pedido-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
 }
 
-.input-field, .pedido-form select, .pedido-form textarea {
+.input-field,
+textarea,
+select {
   width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  margin-bottom: 15px;
-  font-size: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
-.input-field:focus, .pedido-form select:focus, .pedido-form textarea:focus {
-  outline: 2px solid #2ecc71;
+textarea {
+  min-height: 100px;
+  resize: vertical;
 }
+
 .checkbox-label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.checkbox-label input {
-  display: none; /* esconde o checkbox padrão */
-}
-
-.custom-check {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #3498db;
-  border-radius: 4px;
-  display: inline-block;
-  position: relative;
-  transition: background 0.3s, border-color 0.3s;
-}
-
-/* quando marcado */
-.checkbox-label input:checked + .custom-check {
-  background: #2ecc71;
-  border-color: #2ecc71;
-}
-
-.checkbox-label input:checked + .custom-check::after {
-  content: "✔";
-  position: absolute;
-  top: -2px;
-  left: 3px;
+  gap: 10px;
   font-size: 16px;
-  color: white;
+  color: #2c3e50;
+  cursor: pointer;
 }
 
+.checkbox-label input[type="checkbox"] {
+  accent-color: #395ab6;
+  width: 18px;
+  height: 18px;
+}
 
 .submit-btn {
   width: 100%;
-  background-color: #9333ea;
+  padding: 14px;
+  background-color: #395ab6;
   color: white;
-  padding: 12px;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
+
+}
+.submit-btn-vol {
+  width: 100%;
+  padding: 14px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  align-items: center;
+  display: flex;
+  flex-direction: column;   /* organiza em coluna */
+  align-items: center;      /* centraliza horizontalmente */
+  justify-content: center;  /* centraliza verticalmente se quiser ocupar a tela */
+  margin: 0 auto;
+  max-width: 600px;         /* largura máxima para não ficar esticado demais */
+
+
+}
+.submit-btn:hover {
+  background-color: #2c4690;
 }
 
-.submit-btn:hover {
-  background-color: #7e22ce;
-}
+
 .dashboard-container {
   padding: 30px;
   background: #f4f6f9;
@@ -447,15 +572,20 @@ color:#000;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 /* Filtros para a página de pedidos */
+
+/* Container dos filtros */
 .filtros {
   display: flex;
-  justify-content: center; /* centraliza horizontalmente */
-  gap: 10px;               /* espaço entre os botões */
+  justify-content: center;
+  flex-wrap: wrap; /* permite quebrar linha */
+  gap: 10px;
   margin-bottom: 20px;
 }
 
+/* Botões padrão (desktop) */
 .filtros button {
-  padding: 8px 16px;
+  padding: 6px 14px;   /* menores já no desktop */
+  font-size: 14px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -468,11 +598,28 @@ color:#000;
 .filtros button:hover {
   background: #2980b9;
 }
+
 /* Botão ativo */
 .filtros button.ativo {
-  background: #2ecc71; /* verde para ativo */
+  background: #2ecc71;
   color: #fff;
 }
+
+/* Mobile: 2 por linha */
+@media (max-width: 600px) {
+  .filtros {
+    justify-content: center;
+  }
+
+  .filtros button {
+    flex: 1 1 45%;   /* ocupa ~45% da largura → 2 por linha */
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
+
 
 .container-ajuda{
   padding-top: 50px;
@@ -488,10 +635,196 @@ html, body {
   flex: 1;               /* ocupa todo o espaço disponível */
 }
 
+
 footer {
-  background: #395ab6;
+  background:  #547ce9;
   color: white;
   text-align: center;
   padding: 15px;
-  margin-top: 20px;    /* empurra o footer para o final da página */
+  font-size: 10px;
+}
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #000;
+  margin-top: 10px;
+}
+
+.badge-resgate {
+  background-color: #e74c3c; /* vermelho */
+}
+
+.badge-alimentacao {
+  background-color: #f39c12; /* laranja */
+}
+
+.badge-abrigo {
+  background-color: #ec1e1e; /* verde */
+}
+
+.badge-default {
+  background-color: #7f8c8d; /* cinza */
+}
+
+
+/*voluntários*/
+/* Container do formulário */
+
+.pedido-form,
+.voluntario-form {
+  max-width: 400px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Títulos */
+.pedido-form h2,
+.voluntario-form h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #395ab6;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Grupos de campos */
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Campos de entrada */
+.input-field,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Botão de envio */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #395ab6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #2c4690;
+}
+
+
+
+/*Frontend (Accordion com cores)*/
+.lista-voluntarios-page{
+   font-size: 1rem;
+  font-weight: bold;
+  color: #395ab6;
+  margin-bottom: 200px;
+  text-align: center;
+  margin-top: 10px;
+  
+ 
+}
+.lista-voluntarios {
+ 
+  display: flex;
+  flex-direction: column;   /* organiza em coluna */
+  align-items: center;      /* centraliza horizontalmente */
+  justify-content: center;  /* centraliza verticalmente se quiser ocupar a tela */
+  margin: 0 auto;
+  max-width: 600px;         /* largura máxima para não ficar esticado demais */
+}
+
+.regiao-card {
+  margin-top: 50px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 700px;
+  
+}
+
+.regiao-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #12098f; 
+  align-items: center;
+}
+
+.expand-icon {
+  font-size: 1.2rem;
+  color: #003882;
+}
+
+.voluntarios-lista {
+  margin-top: 8px;
+  padding-left: 16px;
+  color: #333;
+}
+
+/* Cores de fundo */
+.cor-0 { background: #b6c9ec; } /* vermelho claro */
+.cor-1 { background: #5fbef5; } /* verde claro */
+.cor-2 { background: #ade9f3; } /* azul claro */
+.cor-3 { background: #36cadd; } /* amarelo claro */
+/* 🔹 Responsividade */
+@media (max-width: 768px) {
+  .lista-voluntarios {
+    padding: 10px;
+  }
+
+  .regiao-card {
+    max-width: 100%;       /* ocupa toda a tela no celular */
+    font-size: 0.95rem;
+  }
+
+  .regiao-header {
+    font-size: 1rem;
+  }
+
+  .expand-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .regiao-card {
+    padding: 8px;
+  }
+
+  .regiao-header {
+    flex-direction: column; /* título e ícone ficam empilhados */
+    align-items: flex-start;
+  }
+
+  .expand-icon {
+    margin-top: 5px;
+  }
 }

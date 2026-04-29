@@ -12,10 +12,11 @@ export default function Navbar() {
         </div>
 
       <div className={`nav-links ${open ? "active" : ""}`}>
-        <Link to="/">Home</Link>
-        <Link to="/pedidos">Pedidos de Ajuda</Link>
+         <Link to="/">Inicio</Link>
+        <Link to="/home">Pedido de ajuda</Link>
+        <Link to="/pedidos">Cadastrados </Link>
         <Link to="/dashboard">Dashboard</Link>
-         <Link to="/oferecer" className="link-red">Oferecer Ajuda </Link>
+         <Link to="/voluntario" className="link-red">Quero ser um Voluntário </Link>
       </div>
 
       <div className="menu-icon" onClick={() => setOpen(!open)}>

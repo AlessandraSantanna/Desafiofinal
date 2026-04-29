@@ -9,9 +9,10 @@ import { atualizarStatus } from "../controllers/pedidosController.js";
 const router = express.Router();
 
 
-router.get("/pedidos", listarPedidos);
-router.post("/pedidos", criarPedido);
-router.get("/pedidos/stats", estatisticasPedidos);
-router.patch("/pedidos/:id/resolver", atualizarStatus);
+router.get("/", listarPedidos);              // GET /pedidos
+router.post("/", criarPedido);               // POST /pedidos
+router.get("/stats", estatisticasPedidos);   // GET /pedidos/stats
+router.patch("/:id/resolver", atualizarStatus); // PATCH /pedidos/:id/resolver
+
 
 export default router;

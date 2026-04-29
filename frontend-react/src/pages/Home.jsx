@@ -1,18 +1,21 @@
 import PedidoForm from "../components/PedidoForm";
 
+
 export default function Home() {
   return (
     <div className="home-container">
       
-      {/* Coluna direita: título + imagem centralizados */}
-      <div className="right-section">
-        <h1 className="home-title"> 🚨 SOS Enchentes</h1>
-        <p>Preecncha as informações  para receber atendimento imediato</p>
-        <img src="/enchente.webp" alt="Logo SOS Enchentes" className="home-logo" />
+      {/* Coluna esquerda: texto e imagem */}
+      <div className="left-section">
+      
+        <img src="/favicon.png" alt="Alerta Solidário" className="home-logo" />
+          <p className="home-subtitle">
+         
+        </p>
       </div>
 
-      {/* Coluna esquerda: apenas o formulário */}
-      <div className="left-section">
+      {/* Coluna direita: formulário */}
+      <div className="right-section">
         <PedidoForm onNovoPedido={() => {}} />
       </div>
     </div>

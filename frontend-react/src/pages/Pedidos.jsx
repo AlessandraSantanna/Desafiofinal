@@ -27,7 +27,7 @@ export default function Pedidos() {
   
     <div className="container-geral">
         <div className="container-title">
-        <h2>📋 Lista de Pedidos</h2>
+        <h2>📋Pedidos Cadastrados</h2>
         </div>
 <div className="container">
       {pedidos.length === 0 ? (

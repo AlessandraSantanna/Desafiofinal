@@ -53,63 +53,87 @@ const navigate = useNavigate();
   }
 
   return (
-   <form onSubmit={handleSubmit} className="pedido-form">
+  <form onSubmit={handleSubmit} className="pedido-form">
   <h2>🆘 Preciso de ajuda</h2>
 
-  <input
-    name="nome"
-    placeholder="Nome"
-    value={form.nome}
-    onChange={handleChange}
-    required
-    className="input-field"
-  /><br /><br />
+  <div className="form-group">
+   
+    <input
+      id="nome"
+      name="nome"
+      placeholder="Digite seu nome"
+      value={form.nome}
+      onChange={handleChange}
+      required
+      className="input-field"
+    />
+  </div>
 
-  <input
-    name="idade"
-    type="number"
-    placeholder="Idade"
-    value={form.idade}
-    onChange={handleChange}
-    required
-    className="input-field"
-  /><br /><br />
+  <div className="form-group">
+   
+    <input
+      id="idade"
+      name="idade"
+      type="number"
+      placeholder="Digite sua idade"
+      value={form.idade}
+      onChange={handleChange}
+      required
+      className="input-field"
+    />
+  </div>
 
-  <select name="tipo" value={form.tipo} onChange={handleChange} className="input-field">
-    <option value="resgate">Resgate - Crianças - Idosos - prioridade alta</option>
-    <option value="alimentacao">Alimentação - prioridade média</option>
-    <option value="abrigo">Abrigo - prioridade baixa</option>
-  </select><br /><br />
+  <div className="form-group">
+   
+    <select
+      id="tipo"
+      name="tipo"
+      value={form.tipo}
+      onChange={handleChange}
+      className="input-field"
+    >
+      <option value="resgate">Resgate - Crianças - Idosos - prioridade alta</option>
+      <option value="alimentacao">Alimentação - prioridade média</option>
+      <option value="abrigo">Abrigo - prioridade baixa</option>
+    </select>
+  </div>
 
-  <textarea
-    name="descricao"
-    placeholder="Descreva a situação"
-    value={form.descricao}
-    onChange={handleChange}
-    className="input-field"
-  /><br /><br />
+  <div className="form-group">
+    <label htmlFor="descricao">Descreva a situação</label>
+    <textarea
+      id="descricao"
+      name="descricao"
+      placeholder="Explique o que está acontecendo"
+      value={form.descricao}
+      onChange={handleChange}
+      className="input-field"
+    />
+  </div>
 
-  <label className="checkbox-label">
+  <div className="form-group checkbox-label">
     <input
       type="checkbox"
       name="tem_animal"
       checked={form.tem_animal}
       onChange={handleChange}
     />
-     <span className="custom-check"></span>
-  Tem animal
-</label><br /><br />
+    <label>Tem animal</label>
+  </div>
 
-  <input
-    name="bairro"
-    placeholder="Bairro"
-    value={form.bairro}
-    onChange={handleChange}
-    required
-    className="input-field"
-  /><br /><br />
+  <div className="form-group">
+  
+    <input
+      id="bairro"
+      name="bairro"
+      placeholder="Informe o bairro"
+      value={form.bairro}
+      onChange={handleChange}
+      required
+      className="input-field"
+    />
+  </div>
 
-  <button type="submit" className="submit-btn">Enviar pedido</button>
+  <button type="submit" className="submit-btn">Cadastrar</button>
 </form>
-    );
+  );
 }

@@ -1,18 +1,22 @@
 import express from "express";
 import cors from "cors";
 import pedidosRoutes from "./routes/pedidosRoutes.js";
+import voluntariosRoutes from "./routes/voluntarios.js";
 
-const app = express(); // 👈 PRIMEIRO cria o app
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use(pedidosRoutes); // 👈 DEPOIS usa as rotas
+// rotas
+app.use("/pedidos", pedidosRoutes);
+app.use("/voluntarios", voluntariosRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API SOS Enchentes rodando 🚀");
-});
+//app.get("/", (req, res) => {
+ // res.send("API SOS Enchentes rodando 🚀");
+//});
 
-app.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
