@@ -10,7 +10,6 @@ export async function getStats() {
   const res = await axios.get(`${BASE_URL}/pedidos/stats`);
   return res.data;
 }
-
 export async function criarPedido(pedido) {
   const res = await fetch(`${BASE_URL}/pedidos`, {
     method: "POST",
@@ -39,4 +38,3 @@ export async function listarVoluntariosPorRegiao() {
   ];
 }
 
-// Outras funções que você já tem (listarPedidos, criarPedido, etc.)
