@@ -1,4 +1,4 @@
-import { pool } from "./database/db.js";
+import { pool } from "./db.js";
 
 async function criarTabelas() {
   try {
