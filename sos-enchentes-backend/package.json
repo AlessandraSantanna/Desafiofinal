@@ -3,9 +3,10 @@
   "version": "1.0.0",
    "type": "module",
   "description": "",
- "scripts": {
+ "id": "fix-start",
+"scripts": {
   "dev": "nodemon src/server.js",
-    "start": "node server.js"
+  "start": "node src/server.js"
 
 },
   "keywords": [],
