@@ -2,9 +2,9 @@ import pkg from "pg";
 const { Pool } = pkg;
 
 export const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "sos_enchentes",
-  password: "root",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
+//postgresql://desafiofinal_27bu_user:2hRkhxd9YU4pmeyvT65RZSKPQSPrdfaj@dpg-d7pfhasvikkc73adlgl0-a.oregon-postgres.render.com/desafiofinal_27bu
