@@ -1,6 +1,6 @@
-import { pool } from "./db.js";
+import { pool } from "./database/db.js";
 
-async function criarTabelas() {
+app.get("/setup-db", async (req, res) => {
   try {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS pedidos (
@@ -25,10 +25,9 @@ async function criarTabelas() {
       );
     `);
 
-    console.log("✅ Tabelas criadas com sucesso!");
+    res.send("✅ Tabelas criadas com sucesso!");
   } catch (err) {
-    console.error("❌ Erro ao criar tabelas:", err);
+    console.error(err);
+    res.status(500).send("Erro ao criar tabelas");
   }
-}
-
-criarTabelas();
+});
