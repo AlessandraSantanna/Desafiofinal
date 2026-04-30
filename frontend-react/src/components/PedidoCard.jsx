@@ -14,8 +14,10 @@ export default function PedidoCard({ pedido, onResolver }) {
       <p><strong>{pedido.nome}</strong></p>
       <p>📍 {pedido.bairro}</p>
       <p>📝 {pedido.descricao}</p>
+      <p>📌 descrição: {pedido.tipo}</p>
       <p>🐾 {pedido.tem_animal ? "Com animal" : "Sem animal"}</p>
       <p>📌 {pedido.status}</p>
+      
 
       {pedido.data_criacao && (
         <p className="pedido-data">🕒 {new Date(pedido.data_criacao).toLocaleString()}</p>
