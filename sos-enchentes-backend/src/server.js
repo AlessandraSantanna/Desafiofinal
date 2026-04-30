@@ -32,4 +32,7 @@ app.listen(PORT, async () => {
   } catch (err) {
     console.error("❌ Erro ao executar schema:", err);
   }
+      app.get("/setup-db", async (req, res) => {
+      res.send("ROTA FUNCIONANDO");
+    });
 });
