@@ -1,7 +1,6 @@
 import pkg from "pg";
 const { Pool } = pkg;
 
-
 export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -13,7 +12,7 @@ pool.connect()
   .then(() => console.log("✅ Conectado ao banco!"))
   .catch(err => console.error("❌ Erro ao conectar:", err));
 
-app.get("/setup-db", async (req, res) => {
+export async function setupDatabase() {
   try {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS pedidos (
@@ -38,9 +37,9 @@ app.get("/setup-db", async (req, res) => {
       );
     `);
 
-    res.send("✅ Tabelas criadas com sucesso!");
+    console.log("✅ Tabelas criadas com sucesso!");
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Erro ao criar tabelas");
+    console.error("❌ Erro ao criar tabelas:", err);
+    throw err;
   }
-});
+}
