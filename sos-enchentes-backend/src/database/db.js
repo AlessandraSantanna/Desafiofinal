@@ -1,4 +1,16 @@
-import { pool } from "./database/db.js";
+import pkg from "pg";
+const { Pool } = pkg;
+
+export const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+pool.connect()
+  .then(() => console.log("✅ Conectado ao banco!"))
+  .catch(err => console.error("❌ Erro ao conectar:", err));
 
 app.get("/setup-db", async (req, res) => {
   try {
