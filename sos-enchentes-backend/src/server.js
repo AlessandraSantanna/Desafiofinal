@@ -6,7 +6,7 @@ import pedidosRoutes from "./routes/pedidosRoutes.js";
 import voluntariosRoutes from "./routes/voluntarios.js";
 import fs from "fs";
 import path from "path";
-import { pool } from "./db.js";
+import { pool } from "./database/db.js";
 
 const app = express();
 
@@ -37,4 +37,4 @@ async function rodarSchema() {
   }
 }
 
-rodarSchema();
+//rodarSchema();
