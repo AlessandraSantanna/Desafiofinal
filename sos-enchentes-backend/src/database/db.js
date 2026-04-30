@@ -18,9 +18,15 @@ export async function setupDatabase() {
       CREATE TABLE IF NOT EXISTS pedidos (
         id SERIAL PRIMARY KEY,
         nome VARCHAR(100),
+        idade INT,
+        tipo VARCHAR(50),
         descricao TEXT,
+        tem_animal BOOLEAN,
+        prioridade VARCHAR(10),
         status VARCHAR(20) DEFAULT 'pendente',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        bairro VARCHAR(100),
+        data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        data_resolvido TIMESTAMP
       );
     `);
 

@@ -26,15 +26,8 @@ export async function resolverPedido(id) {
     method: "PATCH"
   });
 }
-// src/services/api.js
 
-// Função mock para não quebrar o build
 export async function listarVoluntariosPorRegiao() {
-  // Retorna dados fictícios enquanto não há backend
-  return [
-    { id: 1, nome: "Voluntário A", regiao: "Centro" },
-    { id: 2, nome: "Voluntário B", regiao: "Zona Norte" },
-    { id: 3, nome: "Voluntário C", regiao: "Zona Sul" },
-  ];
+  const res = await fetch(`${API_URL}/voluntarios`);
+  return res.json();
 }
-
