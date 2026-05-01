@@ -21,4 +21,3 @@ CREATE TABLE voluntarios (
   regiao VARCHAR(50),   -- 🔥 chave para agrupar
   criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-//criado tabela

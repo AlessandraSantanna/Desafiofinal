@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// rotas
+
 app.use("/pedidos", pedidosRoutes);
 app.use("/voluntarios", voluntariosRoutes);
 
@@ -22,9 +22,8 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 
-  // roda o schema automaticamente ao iniciar
   try {
-    const schemaPath = path.resolve("src/schema.sql"); // ajuste se necessário
+    const schemaPath = path.resolve("src/schema.sql"); 
     const sql = fs.readFileSync(schemaPath, "utf-8");
 
     await pool.query(sql);
