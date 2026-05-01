@@ -5,7 +5,7 @@ export default function ListaPedidos({ pedidos, resolverPedido, filtro }) {
     if (filtro === "resolvidos") return pedido.status === "resolvido";
         if (filtro === "pendentes") return pedido.status !== "resolvido";
     if (filtro === "comAnimais") return pedido.tem_animal === true;
-    return true; // sem filtro, mostra todos
+    return true; 
   });
 
   return (

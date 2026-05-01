@@ -27,11 +27,11 @@ export default function Dashboard({ stats }) {
           stats.resolvidos,
         ],
         backgroundColor: [
-          "#3498db", // azul
-          "#e74c3c", // vermelho
-          "#f1c40f", // amarelo
-          "#2ecc71", // verde
-          "#9b59b6", // roxo
+          "#3498db",  
+          "#e74c3c", 
+          "#f1c40f",
+          "#2ecc71",
+          "#9b59b6", 
         ],
         borderRadius: 8,
       },

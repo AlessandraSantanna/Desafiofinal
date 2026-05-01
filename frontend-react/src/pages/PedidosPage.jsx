@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPedidos } from "../services/api"; // sua função que busca os pedidos
+import { getPedidos } from "../services/api"; /* sua função que busca os pedidos*/
 import ListaPedidos from "../components/ListaPedidos";
 
 export default function PedidosPage() {
@@ -15,7 +15,7 @@ export default function PedidosPage() {
   }, []);
 
   function resolverPedido(id) {
-    // aqui você chama sua API para marcar como resolvido
+    /* aqui você chama sua API para marcar como resolvido */
     setPedidos((prev) =>
       prev.map((p) =>
         p.id === id ? { ...p, status: "resolvido", data_resolvido: new Date() } : p

@@ -1,7 +1,7 @@
 import { pool } from "../database/db.js";
 import { definirPrioridade } from "../services/prioridadeService.js";
 
-// 🆘 Criar pedido
+/* 🆘 Criar pedido*/
 export async function criarPedido(req, res) {
   const { nome, idade, tipo, descricao, tem_animal, bairro } = req.body;
   const prioridade = definirPrioridade({ idade, tipo, tem_animal });
@@ -20,7 +20,7 @@ export async function criarPedido(req, res) {
   }
 }
 
-// 📋 Listar pedidos
+/* 📋 Listar pedidos */
 export async function listarPedidos(req, res) {
   const { prioridade } = req.query;
   try {
@@ -42,7 +42,7 @@ export async function listarPedidos(req, res) {
   }
 }
 
-// 📊 Estatísticas
+/* 📊 Estatísticas */
 export async function estatisticasPedidos(req, res) {
   try {
     const result = await pool.query(`
@@ -61,7 +61,7 @@ export async function estatisticasPedidos(req, res) {
   }
 }
 
-// ✅ Atualizar status
+/* ✅ Atualizar status */
 export async function atualizarStatus(req, res) {
   const { id } = req.params;
   try {
@@ -81,7 +81,7 @@ export async function atualizarStatus(req, res) {
 
 
 
-// 📌 Listar voluntários por região
+/* 📌 Listar voluntários por região */
 export async function listarVoluntariosPorRegiao(req, res) {
   try {
     const result = await pool.query(`
@@ -97,7 +97,7 @@ export async function listarVoluntariosPorRegiao(req, res) {
 
   
 }
-// 🆘 Criar voluntário
+/* 🆘 Criar voluntário */
 export async function criarVoluntario(req, res) {
   const { nome, telefone, email, disponibilidade, observacoes, regiao } = req.body;
 

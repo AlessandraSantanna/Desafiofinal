@@ -44,7 +44,7 @@ const navigate = useNavigate();
         bairro: ""
       });
 
-      onNovoPedido(); // 🔥 recarrega lista
+      onNovoPedido(); 
 
     } catch (error) {
       alert("Erro ao criar pedido ❌");

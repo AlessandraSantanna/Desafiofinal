@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import VoluntarioForm from "../components/VoluntarioForm";
 
 export default function VoluntarioPage() {
-  const navigate = useNavigate(); // 👈 inicializa o hook
+  const navigate = useNavigate(); /* 👈 inicializa o hook */
 
   return (
     <div className="home-container">
@@ -13,7 +13,7 @@ export default function VoluntarioPage() {
           <div>
             <button
               className="submit-btn-vol"
-              onClick={() => navigate("/lista-voluntarios")} // 👈 agora funciona
+              onClick={() => navigate("/lista-voluntarios")}  /* 👈 agora funciona */
             >
               Voluntários Cadastrados
             </button>

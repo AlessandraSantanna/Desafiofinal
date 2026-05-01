@@ -22,7 +22,7 @@ export default function VoluntarioForm({ onNovoVoluntario }) {
  async function handleSubmit(e) {
   e.preventDefault();
   try {
-    console.log("Enviando voluntário:", form); // 🔥 debug
+    console.log("Enviando voluntário:", form);
     await axios.post("http://localhost:3000/voluntarios", form);
     alert("Voluntário cadastrado com sucesso 🚀");
     navigate("/voluntario");
