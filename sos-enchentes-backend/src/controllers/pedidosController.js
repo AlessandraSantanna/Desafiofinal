@@ -78,8 +78,8 @@ export async function estatisticasPedidos(req, res) {
     `);
     res.json(result.rows[0]);
   } catch (error) {
-  // res.status(500).json({ erro: "Erro ao buscar estatísticas" });
-  console.error("ERRO STATS:", error);
+   res.status(500).json({ erro: "Erro ao buscar estatísticas" });
+//  console.error("ERRO STATS:", error);
 res.status(500).json({ erro: error.message });
   }
 }

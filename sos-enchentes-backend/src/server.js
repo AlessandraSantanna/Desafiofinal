@@ -3,6 +3,9 @@ import express from "express";
 import cors from "cors";
 import pedidosRoutes from "./routes/pedidosRoutes.js";
 import voluntariosRoutes from "./routes/voluntarios.js";
+import path from "path";
+import fs from "fs";
+import { pool } from "./database/db.js";
 
 const app = express();
 
@@ -49,7 +52,9 @@ app.listen(PORT, async () => {
     const schemaPath = path.resolve("src/schema.sql");
     const sql = fs.readFileSync(schemaPath, "utf-8");
 
-    await pool.query(sql); // ✅ agora pode
+   if (process.env.NODE_ENV !== "production") {
+  await pool.query(sql);
+}
 
     console.log("✅ Schema executado!");
   } catch (err) {
