@@ -72,8 +72,7 @@ export async function estatisticasPedidos(req, res) {
         COUNT(*) FILTER (WHERE prioridade = 'alta') AS alta,
         COUNT(*) FILTER (WHERE prioridade = 'media') AS media,
         COUNT(*) FILTER (WHERE prioridade = 'baixa') AS baixa,
-        COUNT(*) FILTER (WHERE status = 'resolvido') AS resolvidos,
-        
+        COUNT(*) FILTER (WHERE status = 'resolvido') AS resolvidos
       FROM pedidos
     `);
     res.json(result.rows[0]);
