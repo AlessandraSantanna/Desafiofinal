@@ -1,11 +1,13 @@
 import pkg from "pg";
 const { Pool } = pkg;
+import "dotenv/config";
+
+// Detecta se está em produção
+const isProduction = process.env.NODE_ENV === "production";
 
 export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: isProduction ? { rejectUnauthorized: false } : false,
 });
 
 pool.connect()
@@ -43,3 +45,4 @@ export async function setupDatabase() {
     throw err;
   }
 }
+console.log("DATABASE_URL no db:", process.env.DATABASE_URL);

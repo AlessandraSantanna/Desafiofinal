@@ -25,7 +25,7 @@ export default function PedidosPage() {
 
   return (
     <div>
-      <h2 className="container-title">📋 Pedidos Cadastrados</h2>
+      <h2 className="container-title">📋 Pessoas Cadastrados</h2>
      <div className="filtros">
   <button
     className={filtro === "todos" ? "ativo" : ""}
