@@ -47,10 +47,13 @@ const navigate = useNavigate();
       onNovoPedido();
 
     } catch (error) {
-      alert("Erro ao criar pedido ❌");
-      console.error(error);
-    }
-  }
+     console.error("ERRO FRONT:", error.response?.data || error);
+
+      alert(
+        error.response?.data?.erro || "Erro ao criar pedido ❌"
+      );
+          }
+        }
 
   return (
   <form onSubmit={handleSubmit} className="pedido-form">

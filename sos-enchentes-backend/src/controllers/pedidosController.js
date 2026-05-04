@@ -3,23 +3,41 @@ import { definirPrioridade } from "../services/prioridadeService.js";
 
 /* 🆘 Criar pedido*/
 export async function criarPedido(req, res) {
-  const { nome, idade, tipo, descricao, tem_animal, bairro } = req.body;
-  const prioridade = definirPrioridade({ idade, tipo, tem_animal });
-
   try {
+    const { nome, idade, tipo, descricao, bairro, tem_animal } = req.body;
+
+    // 🔥 validação
+    if (!nome || !tipo || !bairro) {
+      return res.status(400).json({
+        erro: "Nome, tipo e bairro são obrigatórios"
+      });
+    }
+
+    const prioridade = definirPrioridade({ idade, tipo, tem_animal });
+
     const result = await pool.query(
       `INSERT INTO pedidos 
       (nome, idade, tipo, descricao, tem_animal, prioridade, bairro)
       VALUES ($1,$2,$3,$4,$5,$6,$7)
       RETURNING *`,
-      [nome, idade, tipo, descricao, tem_animal, prioridade, bairro]
+      [
+        nome,
+        Number(idade) || null,
+        tipo,
+        descricao || null,
+        Boolean(tem_animal),
+        prioridade,
+        bairro
+      ]
     );
+
     res.json(result.rows[0]);
+
   } catch (error) {
+    console.error("ERRO AO CRIAR PEDIDO:", error); // 👈 ESSENCIAL
     res.status(500).json({ erro: error.message });
   }
 }
-
 /* 📋 Listar pedidos */
 export async function listarPedidos(req, res) {
   const { prioridade } = req.query;
