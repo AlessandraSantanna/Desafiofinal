@@ -73,14 +73,14 @@ export async function estatisticasPedidos(req, res) {
         COUNT(*) FILTER (WHERE prioridade = 'media') AS media,
         COUNT(*) FILTER (WHERE prioridade = 'baixa') AS baixa,
         COUNT(*) FILTER (WHERE status = 'resolvido') AS resolvidos,
-        AVG(
-          EXTRACT(EPOCH FROM (data_resolvido - data_criacao))/3600
-        ) AS media_horas
+        
       FROM pedidos
     `);
     res.json(result.rows[0]);
   } catch (error) {
-   res.status(500).json({ erro: "Erro ao buscar estatísticas" });
+  // res.status(500).json({ erro: "Erro ao buscar estatísticas" });
+  console.error("ERRO STATS:", error);
+res.status(500).json({ erro: error.message });
   }
 }
 
