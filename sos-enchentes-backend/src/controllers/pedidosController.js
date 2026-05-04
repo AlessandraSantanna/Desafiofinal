@@ -4,26 +4,40 @@ import { definirPrioridade } from "../services/prioridadeService.js";
 /* 🆘 Criar pedido*/
 export async function criarPedido(req, res) {
   try {
-   const result = await pool.query(
-  `INSERT INTO pedidos 
-  (nome, idade, tipo, descricao, tem_animal, prioridade, bairro)
-  VALUES ($1,$2,$3,$4,$5,$6,$7)
-  RETURNING *`,
-  [
-    nome,
-    Number(idade) || null,
-    tipo?.toString().slice(0, 50),
-    descricao?.toString().slice(0, 255),
-    Boolean(tem_animal),
-    prioridade?.toString().slice(0, 20),
-    bairro?.toString().slice(0, 100)
-  ]
-);
+    // 🔥 pegar dados do body
+    const { nome, idade, tipo, descricao, bairro, tem_animal } = req.body;
+
+    // 🔥 validação básica
+    if (!nome || !tipo || !bairro) {
+      return res.status(400).json({
+        erro: "Nome, tipo e bairro são obrigatórios"
+      });
+    }
+
+    // 🔥 calcular prioridade
+    const prioridade = definirPrioridade({ idade, tipo, tem_animal });
+
+    // 🔥 inserir no banco
+    const result = await pool.query(
+      `INSERT INTO pedidos 
+      (nome, idade, tipo, descricao, tem_animal, prioridade, bairro)
+      VALUES ($1,$2,$3,$4,$5,$6,$7)
+      RETURNING *`,
+      [
+        nome,
+        Number(idade) || null,
+        tipo?.toString().slice(0, 50),
+        descricao?.toString().slice(0, 255),
+        Boolean(tem_animal),
+        prioridade?.toString().slice(0, 20),
+        bairro?.toString().slice(0, 100)
+      ]
+    );
 
     res.json(result.rows[0]);
 
   } catch (error) {
-    console.error("ERRO AO CRIAR PEDIDO:", error); // 👈 ESSENCIAL
+    console.error("ERRO AO CRIAR PEDIDO:", error);
     res.status(500).json({ erro: error.message });
   }
 }
