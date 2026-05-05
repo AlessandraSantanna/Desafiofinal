@@ -85,7 +85,8 @@ res.status(500).json({ erro: error.message });
 
 /* ✅ Atualizar status */
 export async function atualizarStatus(req, res) {
-  const { id } = req.params;
+  const id = Number(req.params.id);
+
   try {
     const result = await pool.query(
       `UPDATE pedidos 
@@ -95,13 +96,20 @@ export async function atualizarStatus(req, res) {
        RETURNING *`,
       [id]
     );
-      res.json(result.rows[0]);
+
+    console.log("RESULT:", result.rows); // 👈 DEBUG
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ erro: "Pedido não encontrado" });
+    }
+
+    res.json(result.rows[0]);
+
   } catch (error) {
-    console.error("Erro ao atualizar:", error);
+    console.error("🔥 ERRO AO RESOLVER:", error); // 👈 ESSENCIAL
     res.status(500).json({ erro: error.message });
   }
 }
-
 
 
 /* 📌 Listar voluntários por região */
