@@ -14,30 +14,29 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 export default function Dashboard({ stats }) {
   if (!stats) return null;
 
-  const data = {
-    labels: ["Total", "Alta", "Média", "Baixa", "Resolvidos"],
-    datasets: [
-      {
-        label: "Pedidos",
-        data: [
-          stats.total,
-          stats.alta,
-          stats.media,
-          stats.baixa,
-          stats.resolvidos,
-        ],
-        backgroundColor: [
-          "#3498db",  
-          "#e74c3c", 
-          "#f1c40f",
-          "#2ecc71",
-          "#9b59b6", 
-        ],
-        borderRadius: 8,
-      },
-    ],
-  };
-
+ const data = {
+  labels: ["Total", "Alta", "Média", "Baixa", "Resolvidos"],
+  datasets: [
+    {
+      label: "Pedidos",
+      data: [
+        Number(stats.total),
+        Number(stats.alta),
+        Number(stats.media),
+        Number(stats.baixa),
+        Number(stats.resolvidos),
+      ],
+      backgroundColor: [
+        "#3498db",
+        "#e74c3c",
+        "#f1c40f",
+        "#2ecc71",
+        "#9b59b6",
+      ],
+      borderRadius: 8,
+    },
+  ],
+};
   const options = {
     responsive: true,
     plugins: {

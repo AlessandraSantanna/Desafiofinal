@@ -95,8 +95,9 @@ export async function atualizarStatus(req, res) {
        RETURNING *`,
       [id]
     );
-    res.json(result.rows[0]);
+      res.json(result.rows[0]);
   } catch (error) {
+    console.error("Erro ao atualizar:", error);
     res.status(500).json({ erro: error.message });
   }
 }
