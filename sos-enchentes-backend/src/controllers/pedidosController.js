@@ -75,11 +75,12 @@ export async function estatisticasPedidos(req, res) {
         COUNT(*) FILTER (WHERE status = 'resolvido') AS resolvidos
       FROM pedidos
     `);
+
     res.json(result.rows[0]);
+
   } catch (error) {
-   res.status(500).json({ erro: "Erro ao buscar estatísticas" });
-//  console.error("ERRO STATS:", error);
-res.status(500).json({ erro: error.message });
+    console.error("ERRO STATS:", error);
+    res.status(500).json({ erro: error.message });
   }
 }
 
@@ -90,14 +91,11 @@ export async function atualizarStatus(req, res) {
   try {
     const result = await pool.query(
       `UPDATE pedidos 
-       SET status = 'resolvido',
-           data_resolvido = CURRENT_TIMESTAMP
+       SET status = 'resolvido'
        WHERE id = $1
        RETURNING *`,
       [id]
     );
-
-    console.log("RESULT:", result.rows); // 👈 DEBUG
 
     if (result.rows.length === 0) {
       return res.status(404).json({ erro: "Pedido não encontrado" });
@@ -106,11 +104,10 @@ export async function atualizarStatus(req, res) {
     res.json(result.rows[0]);
 
   } catch (error) {
-    console.error("🔥 ERRO AO RESOLVER:", error); // 👈 ESSENCIAL
+    console.error("ERRO AO RESOLVER:", error);
     res.status(500).json({ erro: error.message });
   }
 }
-
 
 /* 📌 Listar voluntários por região */
 export async function listarVoluntariosPorRegiao(req, res) {

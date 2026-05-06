@@ -324,7 +324,7 @@ button:hover {
   font-weight: 600;
 }
 .nav-links a.link-red {
-  color: #ee2626; /* vermelho só para esse item */
+  color: #fff; /* vermelho só para esse item */
 }
 
 /* 🍔 HAMBURGUER */
