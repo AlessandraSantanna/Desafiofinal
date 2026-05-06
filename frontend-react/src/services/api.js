@@ -35,9 +35,6 @@ export async function resolverPedido(id) {
 
 // 👇 mock (ok por enquanto)
 export async function listarVoluntariosPorRegiao() {
-  return [
-    { id: 1, nome: "Voluntário A", regiao: "Centro" },
-    { id: 2, nome: "Voluntário B", regiao: "Zona Norte" },
-    { id: 3, nome: "Voluntário C", regiao: "Zona Sul" },
-  ];
+  const res = await api.get("/voluntarios");
+  return res.data;
 }

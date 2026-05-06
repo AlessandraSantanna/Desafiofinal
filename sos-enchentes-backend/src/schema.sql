@@ -29,3 +29,11 @@ ADD COLUMN IF NOT EXISTS data_resolvido TIMESTAMP;
 
 ALTER TABLE pedidos 
 ALTER COLUMN prioridade TYPE VARCHAR(40);
+
+
+SELECT 
+  regiao, 
+  COALESCE(json_agg(voluntarios.*), '[]') AS lista
+FROM voluntarios
+GROUP BY regiao
+ORDER BY regiao;
