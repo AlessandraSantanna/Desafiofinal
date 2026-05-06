@@ -33,8 +33,16 @@ export default function ListaVoluntarios() {
           {aberto === idx && (
             <ul className="voluntarios-lista">
               {(grupo.lista || []).map((v) => (
-                <li key={v.id}>
-                  <strong>{v.nome}</strong> - {v.telefone}
+                <li key={v.id} className="voluntario-item">
+                  <strong>{v.nome}</strong>
+
+                  <p>📞 {v.telefone}</p>
+                  <p>📧 {v.email}</p>
+                  <p>🕒 Horário disponível: {v.disponibilidade}</p>
+
+                  {v.observacoes && (
+                    <p>📝 {v.observacoes}</p>
+                  )}
                 </li>
               ))}
             </ul>
