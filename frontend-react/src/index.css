@@ -563,6 +563,10 @@ textarea {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+   max-width: 600px;   /* 👈 controla largura */
+  margin: 0 auto;     /* centraliza */
+
+
 }
 .chart-container {
   margin-top: 40px;
@@ -572,7 +576,9 @@ textarea {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 /* Filtros para a página de pedidos */
-
+canvas {
+  max-height: 300px !important; /* 👈 controla altura */
+}
 /* Container dos filtros */
 .filtros {
   display: flex;
