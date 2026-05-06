@@ -3,13 +3,13 @@ import PedidoCard from "./PedidoCard";
 export default function ListaPedidos({ pedidos, resolverPedido, filtro }) {
   const pedidosFiltrados = pedidos.filter((pedido) => {
     if (filtro === "resolvidos") return pedido.status === "resolvido";
-        if (filtro === "pendentes") return pedido.status !== "resolvido";
+    if (filtro === "pendentes") return pedido.status !== "resolvido";
     if (filtro === "comAnimais") return pedido.tem_animal === true;
-    return true; 
+    return true;
   });
 
   return (
-    <div className="container">
+    <div className="lista-pedidos">
       {pedidosFiltrados.map((pedido) => (
         <PedidoCard
           key={pedido.id}
