@@ -10,7 +10,11 @@ import { pool } from "./database/db.js";
 const app = express();
 
 /* 🔥 Middlewares */
-app.use(cors());
+app.use(cors({
+  origin: "*", // libera qualquer origem (ok para projeto acadêmico)
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  allowedHeaders: ["Content-Type"]
+}));
 app.use(express.json());
 
 /* ✅ Rota raiz */

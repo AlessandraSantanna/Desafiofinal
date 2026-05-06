@@ -5,13 +5,13 @@ import axios from "axios";
 
 export default function VoluntarioForm({ onNovoVoluntario }) {
   const [form, setForm] = useState({
-    nome: "",
-    telefone: "",
-    email: "",
-    disponibilidade: "",
-    observacoes: ""
-  });
-
+  nome: "",
+  telefone: "",
+  email: "",
+  disponibilidade: "",
+  observacoes: "",
+  regiao: "" // 👈 obrigatório
+});
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -22,10 +22,11 @@ export default function VoluntarioForm({ onNovoVoluntario }) {
  async function handleSubmit(e) {
   e.preventDefault();
   try {
-    console.log("Enviando voluntário:", form);
-    await axios.post("http://localhost:3000/voluntarios", form);
+   const API_URL = "https://desafiofinal-zdnn.onrender.com";
+await axios.post(`${API_URL}/voluntarios`, form);
+
     alert("Voluntário cadastrado com sucesso 🚀");
-    navigate("/voluntario");
+  navigate("/lista-voluntarios");
     setForm({ nome:"", telefone:"", email:"", disponibilidade:"", observacoes:"", regiao:"" });
     if (onNovoVoluntario) onNovoVoluntario();
   } catch (error) {
