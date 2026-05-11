@@ -673,9 +673,9 @@ canvas {
 
 /* gráficos menores */
 .small-chart {
-  flex: 1;
-  min-width: 320px;
-  max-width: 500px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 15px;
 }
 
 /* canvas menor */

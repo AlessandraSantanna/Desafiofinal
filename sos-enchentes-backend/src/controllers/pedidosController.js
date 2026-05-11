@@ -8,11 +8,11 @@ export async function criarPedido(req, res) {
     const { nome, idade, tipo, descricao, bairro, tem_animal } = req.body;
 
     // 🔥 validação básica
-    if (!nome || !tipo || !bairro) {
-      return res.status(400).json({
-        erro: "Nome, tipo e bairro são obrigatórios"
-      });
-    }
+   if (!nome || !tipo || !regiao) {
+  return res.status(400).json({
+    erro: "Nome, tipo e região são obrigatórios"
+  });
+}
 
     // 🔥 calcular prioridade
     const prioridade = definirPrioridade({ idade, tipo, tem_animal });
@@ -20,7 +20,7 @@ export async function criarPedido(req, res) {
     // 🔥 inserir no banco
     const result = await pool.query(
       `INSERT INTO pedidos 
-      (nome, idade, tipo, descricao, tem_animal, prioridade, bairro)
+      (nome, idade, tipo, descricao, tem_animal, prioridade, regiao)
       VALUES ($1,$2,$3,$4,$5,$6,$7)
       RETURNING *`,
       [
@@ -30,7 +30,7 @@ export async function criarPedido(req, res) {
         descricao?.toString().slice(0, 255),
         Boolean(tem_animal),
         prioridade?.toString().slice(0, 20),
-        bairro?.toString().slice(0, 100)
+        regiao?.toString().slice(0, 100)
       ]
     );
 

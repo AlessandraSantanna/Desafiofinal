@@ -74,9 +74,7 @@ export default function Dashboard({ stats }) {
       "Abrigo",
       "Resgate",
       "Alimentação",
-      "Cozinha",
-      "Limpeza",
-      "Socorro",
+      
     ],
 
     datasets: [
@@ -87,9 +85,7 @@ export default function Dashboard({ stats }) {
           Number(stats.abrigo || 0),
           Number(stats.resgate || 0),
           Number(stats.alimentacao || 0),
-          Number(stats.cozinha || 0),
-          Number(stats.limpeza || 0),
-          Number(stats.socorro || 0),
+         
         ],
 
         borderColor: "#3498db",
