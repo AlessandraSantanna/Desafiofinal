@@ -5,7 +5,7 @@ import { definirPrioridade } from "../services/prioridadeService.js";
 export async function criarPedido(req, res) {
   try {
     // 🔥 pegar dados do body
-    const { nome, idade, tipo, descricao, bairro, tem_animal } = req.body;
+    const { nome, idade, tipo, descricao, regiao, tem_animal } = req.body;
 
     // 🔥 validação básica
    if (!nome || !tipo || !regiao) {

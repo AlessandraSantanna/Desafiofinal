@@ -55,3 +55,6 @@ VALUES ('Maria', 'centro', 'resgate');
 ALTER TABLE pedidos ADD COLUMN bairro TEXT;
 ALTER TABLE pedidos
 ADD COLUMN IF NOT EXISTS regiao TEXT;
+
+ALTER TABLE pedidos
+DROP COLUMN bairro;

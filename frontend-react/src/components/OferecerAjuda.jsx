@@ -9,7 +9,7 @@ export default function OferecerAjuda({ onNovoPedido }) {
     tipo: "resgate",
     descricao: "",
     tem_animal: false,
-    bairro: ""
+    regiao: ""
   });
 const navigate = useNavigate();
   function handleChange(e) {

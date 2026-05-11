@@ -74,7 +74,7 @@ button:hover {
     <input type="checkbox" id="tem_animal"> Tem animal
   </label><br><br>
 
-  <input type="text" id="bairro" placeholder="Bairro" required><br><br>
+  <input type="text" id="regiao" placeholder="Região" required><br><br>
 
   <button type="submit">Enviar pedido</button>
 </form>
@@ -82,10 +82,10 @@ button:hover {
 <hr>
 
   <script>
-    function agruparPorBairro(pedidos) {
+    function agruparPorRegiao(pedidos) {
   return pedidos.reduce((acc, p) => {
-    if (!acc[p.bairro]) acc[p.bairro] = [];
-    acc[p.bairro].push(p);
+    if (!acc[p.regiao]) acc[p.regiao] = [];
+    acc[p.regiao].push(p);
     return acc;
   }, {});
 }
@@ -109,7 +109,7 @@ async function carregarPedidos() {
       <strong>${p.nome}</strong><br>
       Idade: ${p.idade}<br>
       Tipo: ${p.tipo}<br>
-      Bairro: ${p.bairro}<br>
+      Região: ${p.regiao}<br>
 
       📝 Descrição: ${p.descricao}<br>
 
@@ -153,7 +153,7 @@ document.getElementById("formPedido").addEventListener("submit", async (e) => {
     tipo: document.getElementById("tipo").value,
     descricao: document.getElementById("descricao").value,
     tem_animal: document.getElementById("tem_animal").checked,
-    bairro: document.getElementById("bairro").value
+    regiao: document.getElementById("regiao").value
   };
 
   try {

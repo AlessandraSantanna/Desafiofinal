@@ -9,7 +9,7 @@ export default function PedidoForm({ onNovoPedido }) {
     tipo: "resgate",
     descricao: "",
     tem_animal: false,
-    bairro: ""
+    regiao: ""
   });
 const navigate = useNavigate();
   function handleChange(e) {
@@ -41,7 +41,7 @@ const navigate = useNavigate();
         tipo: "resgate",
         descricao: "",
         tem_animal: false,
-        Região: ""
+        região: ""
       });
 
       onNovoPedido();
