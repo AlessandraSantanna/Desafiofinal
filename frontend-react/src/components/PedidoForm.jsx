@@ -41,7 +41,7 @@ const navigate = useNavigate();
         tipo: "resgate",
         descricao: "",
         tem_animal: false,
-        bairro: ""
+        Região: ""
       });
 
       onNovoPedido();
@@ -125,15 +125,27 @@ const navigate = useNavigate();
 
   <div className="form-group">
   
-    <input
-      id="bairro"
-      name="bairro"
-      placeholder="Informe o bairro"
-      value={form.bairro}
-      onChange={handleChange}
-      required
-      className="input-field"
-    />
+   <select
+  name="regiao"
+  value={form.regiao}
+  onChange={handleChange}
+  required
+  className="input-field"
+>
+  <option value="">Selecione a região</option>
+
+  <option value="zona_norte">Zona Norte</option>
+
+  <option value="zona_sul">Zona Sul</option>
+
+  <option value="zona_oeste">Zona Oeste</option>
+
+  <option value="centro">Centro</option>
+
+  <option value="baixada">Baixada Fluminense</option>
+</select>
+
+<br /><br />
   </div>
 
   <button type="submit" className="submit-btn">Cadastrar</button>

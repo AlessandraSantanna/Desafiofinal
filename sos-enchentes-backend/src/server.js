@@ -27,16 +27,23 @@ app.get("/", (req, res) => {
 });
 
 /* 📊 Stats */
+/* =========================
+   📊 STATS DOS PEDIDOS
+========================= */
 app.get("/pedidos/stats", async (req, res) => {
   try {
 
-    const result = await pool.query("SELECT * FROM pedidos");
+    const result = await pool.query(
+      "SELECT * FROM pedidos"
+    );
 
     const pedidos = result.rows;
 
     const stats = {
+
       total: pedidos.length,
 
+      /* 🚨 prioridades */
       alta: pedidos.filter(
         (p) => p.prioridade?.toLowerCase() === "alta"
       ).length,
@@ -49,10 +56,16 @@ app.get("/pedidos/stats", async (req, res) => {
         (p) => p.prioridade?.toLowerCase() === "baixa"
       ).length,
 
+      /* ✅ status */
       resolvidos: pedidos.filter(
         (p) => p.status?.toLowerCase() === "resolvido"
       ).length,
 
+      pendentes: pedidos.filter(
+        (p) => p.status?.toLowerCase() === "pendente"
+      ).length,
+
+      /* 🆘 tipos */
       abrigo: pedidos.filter(
         (p) => p.tipo?.toLowerCase() === "abrigo"
       ).length,
@@ -64,22 +77,61 @@ app.get("/pedidos/stats", async (req, res) => {
       alimentacao: pedidos.filter(
         (p) => p.tipo?.toLowerCase() === "alimentacao"
       ).length,
+
+      cozinha: pedidos.filter(
+        (p) => p.tipo?.toLowerCase() === "cozinha"
+      ).length,
+
+      limpeza: pedidos.filter(
+        (p) => p.tipo?.toLowerCase() === "limpeza"
+      ).length,
+
+      socorro: pedidos.filter(
+        (p) => p.tipo?.toLowerCase() === "socorro"
+      ).length,
+
+      /* 📍 regiões */
+      zona_norte: pedidos.filter(
+        (p) => p.regiao?.toLowerCase() === "zona_norte"
+      ).length,
+
+      zona_sul: pedidos.filter(
+        (p) => p.regiao?.toLowerCase() === "zona_sul"
+      ).length,
+
+      zona_oeste: pedidos.filter(
+        (p) => p.regiao?.toLowerCase() === "zona_oeste"
+      ).length,
+
+      centro: pedidos.filter(
+        (p) => p.regiao?.toLowerCase() === "centro"
+      ).length,
+
+      baixada: pedidos.filter(
+        (p) => p.regiao?.toLowerCase() === "baixada"
+      ).length,
     };
 
     res.json(stats);
 
   } catch (error) {
+
     console.error("ERRO STATS:", error);
 
     res.status(500).json({
-      erro: "Erro ao carregar stats",
+      erro: "Erro ao carregar estatísticas",
     });
   }
 });
 
-/* ✅ Rotas principais */
+/* =========================
+   🛣️ ROTAS
+========================= */
 app.use("/pedidos", pedidosRoutes);
+
 app.use("/voluntarios", voluntariosRoutes);
+
+
 
 /* ✅ Health check (melhor nome que setup-db) */
 app.get("/health", (req, res) => {

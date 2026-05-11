@@ -41,7 +41,7 @@ const navigate = useNavigate();
         tipo: "resgate",
         descricao: "",
         tem_animal: false,
-        bairro: ""
+        Região: ""
       });
 
       onNovoPedido(); 

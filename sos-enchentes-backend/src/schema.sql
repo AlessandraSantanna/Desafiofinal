@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
   tem_animal BOOLEAN,
   prioridade VARCHAR(10),
   status VARCHAR(20) DEFAULT 'pendente',
-  bairro VARCHAR(100)
+  regiao VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS voluntarios (
@@ -37,3 +37,21 @@ SELECT
 FROM voluntarios
 GROUP BY regiao
 ORDER BY regiao;
+
+ALTER TABLE pedidos
+RENAME COLUMN bairro TO regiao;
+
+
+CREATE TABLE IF NOT EXISTS pedidos (
+  id SERIAL PRIMARY KEY,
+  nome TEXT,
+  regiao TEXT,
+  tipo TEXT
+);
+
+INSERT INTO pedidos (nome, regiao, tipo)
+VALUES ('Maria', 'centro', 'resgate');
+
+ALTER TABLE pedidos ADD COLUMN bairro TEXT;
+ALTER TABLE pedidos
+ADD COLUMN IF NOT EXISTS regiao TEXT;

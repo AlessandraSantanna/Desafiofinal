@@ -661,6 +661,27 @@ canvas {
     padding: 15px;
   }
 }
+/* =========================
+   📊 LINHA DOS GRÁFICOS
+========================= */
+.charts-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+/* gráficos menores */
+.small-chart {
+  flex: 1;
+  min-width: 320px;
+  max-width: 500px;
+}
+
+/* canvas menor */
+.small-chart canvas {
+  max-height: 260px !important;
+}
 
 /* =========================
    🧾 RODAPÉ

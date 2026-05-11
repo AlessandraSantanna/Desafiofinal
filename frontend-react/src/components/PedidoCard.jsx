@@ -12,7 +12,7 @@ export default function PedidoCard({ pedido, onResolver }) {
       <h3 className="pedido-titulo">{formatPrioridade(pedido.prioridade)}</h3>
 
       <p><strong>{pedido.nome}</strong></p>
-      <p>📍 {pedido.bairro}</p>
+      <p>📍 {pedido.regiao}</p>
       <p>📝 {pedido.descricao}</p>
       <p>📌 descrição: {pedido.tipo}</p>
       <p>🐾 {pedido.tem_animal ? "Com animal" : "Sem animal"}</p>
