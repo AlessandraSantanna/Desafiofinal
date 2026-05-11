@@ -10,7 +10,7 @@ export default function Landing() {
           <h1 className="landing-title">🚨 Alerta Solidário</h1>
           <p className="landing-text">
             Quando a enchente chega, cada segundo importa. <br />
-            Nosso SOS Enchente conecta rapidamente quem precisa de ajuda com quem pode ajudar — 
+           O Alerta Solidário conecta rapidamente quem precisa de ajuda com quem pode ajudar — 
             seja abrigo, resgate ou doações. <br />
             Juntos, transformamos solidariedade em ação e levamos esperança a quem mais precisa.
           </p>

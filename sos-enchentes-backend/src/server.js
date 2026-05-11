@@ -26,6 +26,57 @@ app.get("/", (req, res) => {
   });
 });
 
+/* 📊 Stats */
+app.get("/pedidos/stats", async (req, res) => {
+  try {
+
+    const result = await pool.query("SELECT * FROM pedidos");
+
+    const pedidos = result.rows;
+
+    const stats = {
+      total: pedidos.length,
+
+      alta: pedidos.filter(
+        (p) => p.prioridade?.toLowerCase() === "alta"
+      ).length,
+
+      media: pedidos.filter(
+        (p) => p.prioridade?.toLowerCase() === "media"
+      ).length,
+
+      baixa: pedidos.filter(
+        (p) => p.prioridade?.toLowerCase() === "baixa"
+      ).length,
+
+      resolvidos: pedidos.filter(
+        (p) => p.status?.toLowerCase() === "resolvido"
+      ).length,
+
+      abrigo: pedidos.filter(
+        (p) => p.tipo?.toLowerCase() === "abrigo"
+      ).length,
+
+      resgate: pedidos.filter(
+        (p) => p.tipo?.toLowerCase() === "resgate"
+      ).length,
+
+      alimentacao: pedidos.filter(
+        (p) => p.tipo?.toLowerCase() === "alimentacao"
+      ).length,
+    };
+
+    res.json(stats);
+
+  } catch (error) {
+    console.error("ERRO STATS:", error);
+
+    res.status(500).json({
+      erro: "Erro ao carregar stats",
+    });
+  }
+});
+
 /* ✅ Rotas principais */
 app.use("/pedidos", pedidosRoutes);
 app.use("/voluntarios", voluntariosRoutes);
