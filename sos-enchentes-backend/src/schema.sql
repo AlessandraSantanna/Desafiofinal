@@ -54,3 +54,7 @@ SELECT * FROM pedidos;
 SELECT column_name
 FROM information_schema.columns
 WHERE table_name = 'pedidos';
+
+SELECT * FROM pedidos
+
+DROP TABLE IF EXISTS pedidos;
