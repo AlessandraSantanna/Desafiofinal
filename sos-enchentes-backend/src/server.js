@@ -10,37 +10,37 @@ import { pool } from "./database/db.js";
 const app = express();
 
 /* 🔥 Middlewares */
-app.use(cors({
-  origin: "*", // libera qualquer origem (ok para projeto acadêmico)
-  methods: ["GET", "POST", "PATCH", "DELETE"],
-  allowedHeaders: ["Content-Type"]
-}));
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
 app.use(express.json());
 
-/* ✅ Rota raiz */
+/* =========================
+   ✅ ROTA RAIZ
+========================= */
 app.get("/", (req, res) => {
   res.json({
     status: "ok",
     mensagem: "API SOS Enchentes rodando 🚀",
-    rotas: ["/pedidos", "/pedidos/stats", "/voluntarios"]
+    rotas: ["/pedidos", "/pedidos/stats", "/voluntarios"],
   });
 });
 
-/* 📊 Stats */
 /* =========================
    📊 STATS DOS PEDIDOS
 ========================= */
 app.get("/pedidos/stats", async (req, res) => {
   try {
-
-    const result = await pool.query(
-      "SELECT * FROM pedidos"
-    );
+    const result = await pool.query("SELECT * FROM pedidos");
 
     const pedidos = result.rows;
 
     const stats = {
-
       total: pedidos.length,
 
       /* 🚨 prioridades */
@@ -113,9 +113,7 @@ app.get("/pedidos/stats", async (req, res) => {
     };
 
     res.json(stats);
-
   } catch (error) {
-
     console.error("ERRO STATS:", error);
 
     res.status(500).json({
@@ -131,39 +129,51 @@ app.use("/pedidos", pedidosRoutes);
 
 app.use("/voluntarios", voluntariosRoutes);
 
-
-
-/* ✅ Health check (melhor nome que setup-db) */
+/* =========================
+   ✅ HEALTH CHECK
+========================= */
 app.get("/health", (req, res) => {
   res.json({ status: "UP" });
 });
 
-/* ❌ Rota não encontrada */
+/* =========================
+   ❌ ROTA NÃO ENCONTRADA
+========================= */
 app.use((req, res) => {
-  res.status(404).json({ erro: "Rota não encontrada" });
+  res.status(404).json({
+    erro: "Rota não encontrada",
+  });
 });
 
-/* 💥 Tratamento global de erros */
+/* =========================
+   💥 TRATAMENTO GLOBAL
+========================= */
 app.use((err, req, res, next) => {
   console.error("ERRO GLOBAL:", err);
-  res.status(500).json({ erro: "Erro interno do servidor" });
+
+  res.status(500).json({
+    erro: "Erro interno do servidor",
+  });
 });
 
 const PORT = process.env.PORT || 3000;
 
-/* 🚀 Iniciar servidor */
+/* =========================
+   🚀 INICIAR SERVIDOR
+========================= */
 app.listen(PORT, async () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 
   try {
+    /* 📦 Executa schema */
     const schemaPath = path.resolve("src/schema.sql");
+
     const sql = fs.readFileSync(schemaPath, "utf-8");
 
-   if (process.env.NODE_ENV !== "production") {
-  await pool.query(sql);
-}
+    await pool.query(sql);
 
     console.log("✅ Schema executado!");
+
   } catch (err) {
     console.error("❌ Erro schema:", err.message);
   }
