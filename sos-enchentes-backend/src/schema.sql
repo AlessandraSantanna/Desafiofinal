@@ -46,3 +46,11 @@ ORDER BY regiao;
 DROP TABLE pedidos;
 
 SELECT * FROM pedidos;
+
+ALTER TABLE pedidos
+ADD COLUMN IF NOT EXISTS regiao TEXT;
+SELECT * FROM pedidos;
+
+SELECT column_name
+FROM information_schema.columns
+WHERE table_name = 'pedidos';
