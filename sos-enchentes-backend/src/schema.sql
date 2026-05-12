@@ -1,4 +1,8 @@
-CREATE TABLE IF NOT EXISTS pedidos (
+
+DROP TABLE IF EXISTS pedidos;
+DROP TABLE IF EXISTS voluntarios;
+
+CREATE TABLE pedidos (
   id SERIAL PRIMARY KEY,
   nome TEXT NOT NULL,
   idade INTEGER,
@@ -12,7 +16,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
   data_resolvido TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS voluntarios (
+CREATE TABLE voluntarios (
   id SERIAL PRIMARY KEY,
   nome VARCHAR(100),
   telefone VARCHAR(20),
