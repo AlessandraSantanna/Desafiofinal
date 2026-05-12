@@ -140,23 +140,20 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
 
-/* 🚀 Iniciar servidor */
 app.listen(PORT, async () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 
   try {
     const schemaPath = path.resolve("src/schema.sql");
 
-    if (fs.existsSync(schemaPath)) {
-      const sql = fs.readFileSync(schemaPath, "utf-8");
+    const sql = fs.readFileSync(schemaPath, "utf-8");
 
-      if (process.env.NODE_ENV !== "production") {
-        await pool.query(sql);
-        console.log("✅ Schema executado!");
-      }
-    }
+    await pool.query(sql);
+
+    console.log("✅ Schema executado!");
 
   } catch (err) {
+
     console.error("❌ Erro schema:", err.message);
   }
 });
