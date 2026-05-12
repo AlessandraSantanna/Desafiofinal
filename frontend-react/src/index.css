@@ -273,6 +273,37 @@ color:#000;
 .resolver-btn:hover {
   background: #2c4690;
 }
+
+.card-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+/* badge do tipo */
+.tipo-badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+}
+
+/* cores */
+.badge-resgate {
+  background: #e74c3c;
+}
+
+.badge-alimentacao {
+  background: #f39c12;
+}
+
+.badge-abrigo {
+  background: #2ecc71;
+}
+
 /* formulário */
 
 form {
