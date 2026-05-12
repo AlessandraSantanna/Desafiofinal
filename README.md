@@ -40,7 +40,7 @@ O projeto foi dividido em três partes principais:
   - `tipo` (resgate ou abrigo)
   - `descricao`
   - `tem_animal`
-  - `bairro`
+  - `região`
   - `status` (pendente ou resolvido)
 
 ---

@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/", listarPedidos);              /* GET /pedidos */
 router.post("/", criarPedido);               /* POST /pedidos */
-router.get("/stats", estatisticasPedidos);   /* GET /pedidos/stats */
+ /*router.get("/stats", estatisticasPedidos);   /* GET /pedidos/stats */
 router.patch("/:id/resolver", atualizarStatus); /* PATCH /pedidos/:id/resolver */
 
 
