@@ -28,9 +28,33 @@ export default function PedidoCard({ pedido, onResolver }) {
         <div className="card-badges">
 
   {/* STATUS */}
-  <span className={`status-badge ${corPrioridade(pedido.prioridade)}`}>
-    {pedido.status}
-  </span>
+<div className={`status-badge ${pedido.prioridade}`}>
+  {pedido.status === "resolvido"
+    ? "✅ Resolvido"
+    : pedido.tipo === "resgate"
+    ? "🚨 Chamado com a Defesa Civil"
+    : pedido.tipo === "alimentacao"
+    ? "🍲 Chamado com os Voluntários"
+    : pedido.tipo === "abrigo"
+    ? "🏠 Chamado com o Abrigo da Região"
+    : "⏳ Pendente"}
+</div>
+
+{/* DATAS */}
+<div className="card-datas">
+  {pedido.data_criacao && (
+    <p className="pedido-data">
+      📅 {new Date(pedido.data_criacao).toLocaleDateString()}
+    </p>
+  )}
+
+  {pedido.status === "resolvido" && pedido.data_resolvido && (
+    <p className="pedido-data resolvido">
+      ✅ Resolvido em{" "}
+      {new Date(pedido.data_resolvido).toLocaleString()}
+    </p>
+  )}
+</div>
 
   {/* TIPO DE CHAMADO */}
   {pedido.status === "pendente" && (

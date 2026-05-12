@@ -211,7 +211,52 @@ color:#000;
   font-weight: 700;
   text-transform: capitalize;
 }
+/* STATUS */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  color: #fff;
+  width: fit-content;
+}
 
+/* cores pela prioridade */
+.status-badge.alta {
+  background: #e53935;
+}
+
+.status-badge.media {
+  background: #f4b400;
+  color: #333;
+}
+
+.status-badge.baixa {
+  background: #34a853;
+}
+
+/* datas */
+.card-datas {
+  margin-top: 10px;
+  border-top: 1px solid #ececec;
+  padding-top: 10px;
+}
+
+.pedido-data {
+  font-size: 13px;
+  color: #777;
+  margin-top: 4px;
+}
+
+.pedido-data.resolvido {
+  color: #2e7d32;
+  font-weight: 600;
+}
 /* badge seguindo prioridade */
 .status-badge.alta {
   background: #fdeaea;
