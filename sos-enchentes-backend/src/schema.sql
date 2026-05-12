@@ -42,3 +42,7 @@ SELECT
 FROM voluntarios
 GROUP BY regiao
 ORDER BY regiao;
+
+DROP TABLE pedidos;
+
+SELECT * FROM pedidos;

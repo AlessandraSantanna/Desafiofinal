@@ -10,30 +10,24 @@ import { pool } from "./database/db.js";
 const app = express();
 
 /* 🔥 Middlewares */
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  allowedHeaders: ["Content-Type"]
+}));
 
 app.use(express.json());
 
-/* =========================
-   ✅ ROTA RAIZ
-========================= */
+/* ✅ Rota raiz */
 app.get("/", (req, res) => {
   res.json({
     status: "ok",
     mensagem: "API SOS Enchentes rodando 🚀",
-    rotas: ["/pedidos", "/pedidos/stats", "/voluntarios"],
+    rotas: ["/pedidos", "/pedidos/stats", "/voluntarios"]
   });
 });
 
-/* =========================
-   📊 STATS DOS PEDIDOS
-========================= */
+/* 📊 Stats */
 app.get("/pedidos/stats", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM pedidos");
@@ -43,7 +37,6 @@ app.get("/pedidos/stats", async (req, res) => {
     const stats = {
       total: pedidos.length,
 
-      /* 🚨 prioridades */
       alta: pedidos.filter(
         (p) => p.prioridade?.toLowerCase() === "alta"
       ).length,
@@ -56,7 +49,6 @@ app.get("/pedidos/stats", async (req, res) => {
         (p) => p.prioridade?.toLowerCase() === "baixa"
       ).length,
 
-      /* ✅ status */
       resolvidos: pedidos.filter(
         (p) => p.status?.toLowerCase() === "resolvido"
       ).length,
@@ -65,7 +57,6 @@ app.get("/pedidos/stats", async (req, res) => {
         (p) => p.status?.toLowerCase() === "pendente"
       ).length,
 
-      /* 🆘 tipos */
       abrigo: pedidos.filter(
         (p) => p.tipo?.toLowerCase() === "abrigo"
       ).length,
@@ -90,7 +81,6 @@ app.get("/pedidos/stats", async (req, res) => {
         (p) => p.tipo?.toLowerCase() === "socorro"
       ).length,
 
-      /* 📍 regiões */
       zona_norte: pedidos.filter(
         (p) => p.regiao?.toLowerCase() === "zona_norte"
       ).length,
@@ -113,6 +103,7 @@ app.get("/pedidos/stats", async (req, res) => {
     };
 
     res.json(stats);
+
   } catch (error) {
     console.error("ERRO STATS:", error);
 
@@ -122,57 +113,48 @@ app.get("/pedidos/stats", async (req, res) => {
   }
 });
 
-/* =========================
-   🛣️ ROTAS
-========================= */
+/* 🛣️ Rotas */
 app.use("/pedidos", pedidosRoutes);
-
 app.use("/voluntarios", voluntariosRoutes);
 
-/* =========================
-   ✅ HEALTH CHECK
-========================= */
+/* ✅ Health */
 app.get("/health", (req, res) => {
   res.json({ status: "UP" });
 });
 
-/* =========================
-   ❌ ROTA NÃO ENCONTRADA
-========================= */
+/* ❌ 404 */
 app.use((req, res) => {
   res.status(404).json({
-    erro: "Rota não encontrada",
+    erro: "Rota não encontrada"
   });
 });
 
-/* =========================
-   💥 TRATAMENTO GLOBAL
-========================= */
+/* 💥 Erro global */
 app.use((err, req, res, next) => {
   console.error("ERRO GLOBAL:", err);
 
   res.status(500).json({
-    erro: "Erro interno do servidor",
+    erro: "Erro interno do servidor"
   });
 });
 
 const PORT = process.env.PORT || 3000;
 
-/* =========================
-   🚀 INICIAR SERVIDOR
-========================= */
+/* 🚀 Iniciar servidor */
 app.listen(PORT, async () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 
   try {
-    /* 📦 Executa schema */
     const schemaPath = path.resolve("src/schema.sql");
 
-    const sql = fs.readFileSync(schemaPath, "utf-8");
+    if (fs.existsSync(schemaPath)) {
+      const sql = fs.readFileSync(schemaPath, "utf-8");
 
-    await pool.query(sql);
-
-    console.log("✅ Schema executado!");
+      if (process.env.NODE_ENV !== "production") {
+        await pool.query(sql);
+        console.log("✅ Schema executado!");
+      }
+    }
 
   } catch (err) {
     console.error("❌ Erro schema:", err.message);
