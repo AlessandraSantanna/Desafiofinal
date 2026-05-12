@@ -137,96 +137,143 @@ color:#000;
   justify-content: center;
   align-items: stretch;
 }
-
 .pedido-card {
-  border: 2px solid transparent;
-  border-radius: 12px;
-  padding: 16px;
-  margin: 12px;
-  text-align: center;
+  position: relative;
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: 0.2s ease;
+
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* 👈 mantém botão no final */
-    width: 100%; /* 👈 importante */
-  height: 100%; /* 👈 todos com mesma altura */
-  min-height: 280px; /* 👈 altura mínima padrão */
+  justify-content: space-between;
 
-  padding: 16px;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  min-height: 320px;
+  overflow: hidden;
 }
 
-/* pontas coloridas */
-.pedido-card::before {
-  content: "";
+/* hover suave SEM apagar cores */
+.pedido-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+/* barra superior */
+.card-top {
   position: absolute;
   top: 0;
   left: 0;
-  height: 12px;
   width: 100%;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  height: 10px;
 }
 
-.pedido-card.alta::before { background-color: #dc3545; }   /* vermelho */
-.pedido-card.media::before { background-color: #ffc107; }  /* amarelo */
-.pedido-card.baixa::before { background-color: #28a745; }  /* verde */
-.pedido-card.resolvido::before { background-color: #6f42c1; } /* roxo */
+/* cores prioridade */
+.card-top.alta {
+  background: #e74c3c;
+}
 
-.pedido-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  
-} 
-.card-actions {
+.card-top.media {
+  background: #f1c40f;
+}
+
+.card-top.baixa {
+  background: #2ecc71;
+}
+
+/* cabeçalho */
+.pedido-header {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: auto;
-  width: 100%; /* 👈 garante expansão */
-}
-.card-actions button {
-  width: 100%;
-  display: block; /* 👈 evita comportamento estranho */
-}
-/* título */
-.pedido-titulo {
-  font-size: 1.2rem;
-  margin-bottom: 8px;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
 }
 
-/* badge */
-.badge {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 4px 8px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  background: #eee;
+/* nome */
+.pedido-nome {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 5px;
 }
 
-.badge-resgate { background: #f8d7da; }
-.badge-alimentacao { background: #d1ecf1; }
-.badge-abrigo { background: #fff3cd; }
+/* região */
+.pedido-regiao {
+  font-size: 14px;
+  color: #666;
+}
 
-/* botão resolver */
-.resolver-btn {
+/* badge status */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+/* badge seguindo prioridade */
+.status-badge.alta {
+  background: #fdeaea;
+  color: #d63031;
+}
+
+.status-badge.media {
+  background: #fff8d6;
+  color: #c28b00;
+}
+
+.status-badge.baixa {
+  background: #e7f8ed;
+  color: #1e8449;
+}
+
+/* conteúdo */
+.pedido-body {
+  margin-top: 18px;
+  flex: 1;
+}
+
+.pedido-tipo {
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+.pedido-animal {
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.pedido-desc {
   margin-top: 12px;
-  padding: 8px 12px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.pedido-data {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #888;
+}
+
+/* botão */
+.resolver-btn {
+  margin-top: 18px;
   border: none;
-  border-radius: 8px;
-  background: #28a745;
+  border-radius: 12px;
+  padding: 12px;
+  background: #395ab6;
   color: white;
+  font-weight: 700;
   cursor: pointer;
-  font-weight: bold;
-    width: 100%; /* 👈 evita quebrar */
+  transition: 0.2s;
 }
+
 .resolver-btn:hover {
-  background: #218838;
+  background: #2c4690;
 }
-
-
+/* formulário */
 
 form {
   background: white;

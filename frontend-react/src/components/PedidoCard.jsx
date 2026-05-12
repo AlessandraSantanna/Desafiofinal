@@ -1,41 +1,65 @@
-
 export default function PedidoCard({ pedido, onResolver }) {
-  function formatPrioridade(prioridade) {
-    if (prioridade === "alta") return "Prioridade Alta";
-    if (prioridade === "media") return "Prioridade Média";
-    if (prioridade === "baixa") return "Prioridade Baixa";
-    return prioridade;
+
+  function corPrioridade(prioridade) {
+    if (prioridade === "alta") return "alta";
+    if (prioridade === "media") return "media";
+    if (prioridade === "baixa") return "baixa";
+    return "default";
   }
 
   return (
     <div className={`pedido-card ${pedido.prioridade}`}>
-      <h3 className="pedido-titulo">{formatPrioridade(pedido.prioridade)}</h3>
 
-      <p><strong>{pedido.nome}</strong></p>
-      <p>📍 {pedido.regiao}</p>
-      <p>📝 {pedido.descricao}</p>
-      <p>📌 descrição: {pedido.tipo}</p>
-      <p>🐾 {pedido.tem_animal ? "Com animal" : "Sem animal"}</p>
-      <p>📌 {pedido.status}</p>
-      
+      {/* barra superior fixa */}
+      <div className={`card-top ${pedido.prioridade}`}></div>
 
-      {pedido.data_criacao && (
-        <p className="pedido-data">🕒 {new Date(pedido.data_criacao).toLocaleString()}</p>
-      )}
-      {pedido.data_resolvido && (
-        <p className="pedido-data">✅ {new Date(pedido.data_resolvido).toLocaleString()}</p>
-      )}
+      {/* cabeçalho */}
+      <div className="pedido-header">
+        <div>
+          <h3 className="pedido-nome">
+            {pedido.nome || "Sem nome"}
+          </h3>
 
-      {pedido.status === "pendente" && (
-        <span className={`badge badge-${pedido.tipo}`}>
-          {pedido.tipo === "resgate" && "Chamado com a Defesa Civil"}
-          {pedido.tipo === "alimentacao" && "Chamado com os Voluntários"}
-          {pedido.tipo === "abrigo" && "Chamado com o Abrigo da Região"}
+          <p className="pedido-regiao">
+            📍 {pedido.regiao}
+          </p>
+        </div>
+
+        <span className={`status-badge ${corPrioridade(pedido.prioridade)}`}>
+          {pedido.status}
         </span>
-      )}
+      </div>
 
+      {/* conteúdo */}
+      <div className="pedido-body">
+
+        <p className="pedido-tipo">
+          🆘 {pedido.tipo}
+        </p>
+
+        <p className="pedido-animal">
+          {pedido.tem_animal ? "🐾 Com animal" : "🐾 Sem animal"}
+        </p>
+
+        <hr />
+
+        <p className="pedido-desc">
+          {pedido.descricao}
+        </p>
+
+        {pedido.data_criacao && (
+          <p className="pedido-data">
+            📅 {new Date(pedido.data_criacao).toLocaleDateString()}
+          </p>
+        )}
+      </div>
+
+      {/* botão */}
       {pedido.status !== "resolvido" && (
-        <button className="resolver-btn" onClick={() => onResolver(pedido.id)}>
+        <button
+          className="resolver-btn"
+          onClick={() => onResolver(pedido.id)}
+        >
           Resolver
         </button>
       )}
