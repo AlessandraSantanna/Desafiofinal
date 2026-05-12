@@ -91,21 +91,28 @@ export async function atualizarStatus(req, res) {
   try {
     const result = await pool.query(
       `UPDATE pedidos 
-       SET status = 'resolvido'
+       SET 
+         status = 'resolvido',
+         data_resolvido = CURRENT_TIMESTAMP
        WHERE id = $1
        RETURNING *`,
       [id]
     );
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ erro: "Pedido não encontrado" });
+      return res.status(404).json({
+        erro: "Pedido não encontrado"
+      });
     }
 
     res.json(result.rows[0]);
 
   } catch (error) {
     console.error("ERRO AO RESOLVER:", error);
-    res.status(500).json({ erro: error.message });
+
+    res.status(500).json({
+      erro: error.message
+    });
   }
 }
 
@@ -141,5 +148,32 @@ export async function criarVoluntario(req, res) {
     res.json(result.rows[0]);
   } catch (error) {
     res.status(500).json({ erro: error.message });
+  }
+}
+
+/* ✅ Resolver pedido */
+export async function resolverPedido(req, res) {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query(
+      `
+      UPDATE pedidos
+      SET status = 'resolvido',
+          data_resolvido = CURRENT_TIMESTAMP
+      WHERE id = $1
+      RETURNING *
+      `,
+      [id]
+    );
+
+    res.json(result.rows[0]);
+
+  } catch (error) {
+    console.error("ERRO AO RESOLVER:", error);
+
+    res.status(500).json({
+      erro: "Erro ao resolver pedido"
+    });
   }
 }

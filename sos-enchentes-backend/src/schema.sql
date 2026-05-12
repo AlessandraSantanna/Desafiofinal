@@ -1,6 +1,5 @@
 
-DROP TABLE IF EXISTS pedidos;
-DROP TABLE IF EXISTS voluntarios;
+
 
 CREATE TABLE pedidos (
   id SERIAL PRIMARY KEY,

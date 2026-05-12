@@ -1,5 +1,4 @@
 import axios from "axios";
-import { pool } from "../database/db.js";
 
 const api = axios.create({
   baseURL: "https://desafiofinal-zdnn.onrender.com",
@@ -28,30 +27,11 @@ export async function criarPedido(pedido) {
 
 
 // ✅ resolver pedido
-export async function resolverPedido(req, res) {
-  try {
-    const { id } = req.params;
-
-    const result = await pool.query(
-      `
-      UPDATE pedidos
-      SET status = 'resolvido',
-          data_resolvido = CURRENT_TIMESTAMP
-      WHERE id = $1
-      RETURNING *
-      `,
-      [id]
-    );
-
-    res.json(result.rows[0]);
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      erro: "Erro ao resolver pedido"
-    });
-  }
+export async function resolverPedido(id) {
+  const res = await api.patch(`/pedidos/${id}`, { status: 'resolvido' });
+  return res.data;
 }
+
 
 // 👇 mock (ok por enquanto)
 export async function listarVoluntariosPorRegiao() {
