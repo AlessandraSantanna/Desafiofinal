@@ -1,14 +1,16 @@
 -- Active: 1774474549688@@127.0.0.1@5432@sos_enchentes
 CREATE TABLE IF NOT EXISTS pedidos (
   id SERIAL PRIMARY KEY,
-  nome VARCHAR(100),
-  idade INT,
-  tipo VARCHAR(50),
+  nome TEXT NOT NULL,
+  idade INTEGER,
+  tipo TEXT NOT NULL,
   descricao TEXT,
-  tem_animal BOOLEAN,
-  prioridade VARCHAR(10),
-  status VARCHAR(20) DEFAULT 'pendente',
-  regiao VARCHAR(100)
+  tem_animal BOOLEAN DEFAULT false,
+  prioridade TEXT,
+  regiao TEXT NOT NULL,
+  status TEXT DEFAULT 'pendente',
+  data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  data_resolvido TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS voluntarios (
@@ -58,3 +60,6 @@ ADD COLUMN IF NOT EXISTS regiao TEXT;
 
 ALTER TABLE pedidos
 DROP COLUMN bairro;
+
+ALTER TABLE pedidos
+ADD COLUMN regiao TEXT;
