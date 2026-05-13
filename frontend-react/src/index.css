@@ -91,13 +91,17 @@ color:#000;
   gap: 20px; /* espaçamento entre os cards */
   padding: 20px;
 }
+/* =========================
+   📦 LISTA DOS CARDS
+========================= */
 .lista-pedidos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  max-width: 1200px; /* 👈 limita expansão */
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+  gap: 14px;
+  justify-content: center;
+  padding: 10px;
 }
+
 /* efeito de suspender no hover */
 .card:hover {
   transform: translateY(-8px);
@@ -137,216 +141,256 @@ color:#000;
   justify-content: center;
   align-items: stretch;
 }
+/* =========================
+   🎴 CARD
+========================= */
 .pedido-card {
   position: relative;
   background: #fff;
   border-radius: 18px;
-  padding: 18px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  transition: 0.2s ease;
+  padding: 16px;
+
+  width: 100%;
+  max-width: 320px;
+
+  min-height: 420px;
+  height: auto;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  min-height: 320px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+
+  transition: 0.2s ease;
   overflow: hidden;
 }
 
-/* hover suave SEM apagar cores */
+/* hover suave */
 .pedido-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
 }
 
-/* barra superior */
-.card-top {
+/* =========================
+   🎨 BORDA SUPERIOR
+========================= */
+.pedido-card::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
+  height: 6px;
   width: 100%;
-  height: 10px;
 }
 
 /* cores prioridade */
-.card-top.alta {
-  background: #e74c3c;
+.pedido-card.alta::before {
+  background: #ef4444;
 }
 
-.card-top.media {
-  background: #f1c40f;
+.pedido-card.media::before {
+  background: #f59e0b;
 }
 
-.card-top.baixa {
-  background: #2ecc71;
+.pedido-card.baixa::before {
+  background: #22c55e;
 }
 
-/* cabeçalho */
-.pedido-header {
+/* borda fina */
+.pedido-card.alta {
+  border: 1px solid #fecaca;
+}
+
+.pedido-card.media {
+  border: 1px solid #fde68a;
+}
+
+.pedido-card.baixa {
+  border: 1px solid #bbf7d0;
+}
+
+/* =========================
+   🧾 TOPO
+========================= */
+.card-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 10px;
-}
-
-/* nome */
-.pedido-nome {
-  font-size: 20px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 5px;
-}
-
-/* região */
-.pedido-regiao {
-  font-size: 14px;
-  color: #666;
-}
-
-/* badge status */
-.status-badge {
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: capitalize;
-}
-/* STATUS */
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 14px;
-  border-radius: 30px;
-  font-size: 13px;
-  font-weight: 700;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  color: #fff;
-  width: fit-content;
-}
-
-/* cores pela prioridade */
-.status-badge.alta {
-  background: #e53935;
-}
-
-.status-badge.media {
-  background: #f4b400;
-  color: #333;
-}
-
-.status-badge.baixa {
-  background: #34a853;
-}
-
-/* datas */
-.card-datas {
-  margin-top: 10px;
-  border-top: 1px solid #ececec;
-  padding-top: 10px;
-}
-
-.pedido-data {
-  font-size: 13px;
-  color: #777;
-  margin-top: 4px;
-}
-
-.pedido-data.resolvido {
-  color: #2e7d32;
-  font-weight: 600;
-}
-/* badge seguindo prioridade */
-.status-badge.alta {
-  background: #fdeaea;
-  color: #d63031;
-}
-
-.status-badge.media {
-  background: #fff8d6;
-  color: #c28b00;
-}
-
-.status-badge.baixa {
-  background: #e7f8ed;
-  color: #1e8449;
-}
-
-/* conteúdo */
-.pedido-body {
-  margin-top: 18px;
-  flex: 1;
-}
-
-.pedido-tipo {
-  font-weight: 600;
-  color: #34495e;
   margin-bottom: 10px;
+  gap: 10px;
 }
 
-.pedido-animal {
-  margin-bottom: 12px;
-  color: #555;
+.pedido-nome {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.2;
+  max-width: 180px;
+  word-break: break-word;
 }
 
-.pedido-desc {
-  margin-top: 12px;
-  color: #444;
-  line-height: 1.5;
+/* =========================
+   STATUS
+========================= */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.pedido-data {
-  margin-top: 16px;
-  font-size: 13px;
-  color: #888;
+.status-badge.pendente {
+  background: #fef2f2;
+  color: #ef4444;
 }
 
-/* botão */
-.resolver-btn {
-  margin-top: 18px;
+.status-badge.resolvido {
+  background: #ecfdf5;
+  color: #16a34a;
+}
+
+/* =========================
+   📍 INFO
+========================= */
+.info-linha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+/* =========================
+   🚨 TIPO
+========================= */
+.tipo-chamado {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  margin-top: 14px;
+}
+
+/* acompanha cor do card */
+.pedido-card.alta .tipo-chamado {
+  color: #ef4444;
+}
+
+.pedido-card.media .tipo-chamado {
+  color: #f59e0b;
+}
+
+.pedido-card.baixa .tipo-chamado {
+  color: #22c55e;
+}
+
+/* =========================
+   📄 DESCRIÇÃO
+========================= */
+.descricao-card {
+  margin-top: 10px;
+  padding-top: 10px;
+
+  border-top: 1px solid #e5e7eb;
+
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #334155;
+
+  min-height: 65px;
+}
+
+/* =========================
+   🚑 BOTÃO TIPO
+========================= */
+.chamado-btn {
+  margin-top: 14px;
+
   border: none;
   border-radius: 12px;
+
   padding: 12px;
-  background: #395ab6;
-  color: white;
+
+  font-size: 1rem;
   font-weight: 700;
+  color: white;
+
+  width: 100%;
+}
+
+/* cores iguais ao card */
+.pedido-card.alta .chamado-btn {
+  background: #ef4444;
+}
+
+.pedido-card.media .chamado-btn {
+  background: #f59e0b;
+}
+
+.pedido-card.baixa .chamado-btn {
+  background: #22c55e;
+}
+
+/* =========================
+   📅 DATAS
+========================= */
+.card-datas {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.data-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* =========================
+   ✅ BOTÃO RESOLVER
+========================= */
+.resolver-btn {
+  margin-top: 14px;
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 11px;
+  font-size: 0.95rem;
+  background: #2563eb;
+  font-weight: 700;
+
   cursor: pointer;
   transition: 0.2s;
 }
 
 .resolver-btn:hover {
-  background: #2c4690;
+  background: #1d4ed8;
 }
 
-.card-badges {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: flex-end;
-}
+/* =========================
+   📱 RESPONSIVO
+========================= */
+@media (max-width: 768px) {
+  .lista-pedidos {
+    grid-template-columns: 1fr;
+  }
 
-/* badge do tipo */
-.tipo-badge {
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 700;
-  color: white;
-  text-align: center;
-}
-
-/* cores */
-.badge-resgate {
-  background: #e74c3c;
-}
-
-.badge-alimentacao {
-  background: #f39c12;
-}
-
-.badge-abrigo {
-  background: #2ecc71;
+  .pedido-card {
+    max-width: 100%;
+    min-height: auto;
+  }
 }
 
 /* formulário */

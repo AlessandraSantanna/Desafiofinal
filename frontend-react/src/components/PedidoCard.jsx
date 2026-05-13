@@ -1,81 +1,84 @@
 export default function PedidoCard({ pedido, onResolver }) {
+  function tipoLabel(tipo) {
+    if (tipo === "resgate") return "🆘 Resgate";
+    if (tipo === "alimentacao") return "🍲 Alimentação";
+    if (tipo === "abrigo") return "🏠 Abrigo";
+    return tipo;
+  }
 
-  function corPrioridade(prioridade) {
-    if (prioridade === "alta") return "alta";
-    if (prioridade === "media") return "media";
-    if (prioridade === "baixa") return "baixa";
-    return "default";
+  function tipoBotao(tipo) {
+    if (tipo === "resgate") return "🚑 Defesa Civil";
+    if (tipo === "alimentacao") return "🍲 Voluntários";
+    if (tipo === "abrigo") return "🏠 Abrigo Regional";
+    return tipo;
   }
 
   return (
     <div className={`pedido-card ${pedido.prioridade}`}>
+      
+      {/* TOPO */}
+      <div className="card-top">
+        <h2 className="pedido-nome">
+          {pedido.nome}
+        </h2>
 
-      {/* barra superior fixa */}
-      <div className={`card-top ${pedido.prioridade}`}></div>
+        <span className={`status-badge ${pedido.status}`}>
+          {pedido.status === "resolvido"
+            ? "Resolvido"
+            : "Pendente"}
+        </span>
+      </div>
 
-      {/* cabeçalho */}
-      <div className="pedido-header">
-        <div>
-          <h3 className="pedido-nome">
-            {pedido.nome || "Sem nome"}
-          </h3>
+      {/* REGIÃO */}
+      <div className="info-linha">
+        📍 {pedido.regiao}
+      </div>
 
-          <p className="pedido-regiao">
-            📍 {pedido.regiao}
-          </p>
+      {/* TIPO */}
+      <div className="tipo-chamado">
+        {tipoLabel(pedido.tipo)}
+      </div>
+
+      {/* ANIMAL */}
+      <div className="info-linha">
+        🐾 {pedido.tem_animal
+          ? "Com animal"
+          : "Sem animal"}
+      </div>
+
+      {/* DESCRIÇÃO */}
+      <div className="descricao-card">
+        {pedido.descricao}
+      </div>
+
+      {/* BOTÃO TIPO */}
+      <button className="chamado-btn">
+        {tipoBotao(pedido.tipo)}
+      </button>
+
+      {/* DATAS */}
+      <div className="card-datas">
+
+        <div className="data-item">
+          📅 Criado em{" "}
+          {pedido.data_criacao &&
+            new Date(
+              pedido.data_criacao
+            ).toLocaleDateString()}
         </div>
 
-        <div className="card-badges">
-
-  {/* STATUS */}
-  <span className={`status-badge ${corPrioridade(pedido.prioridade)}`}>
-    {pedido.status}
-  </span>
-
-  {/* TIPO DE CHAMADO */}
-  {pedido.status === "pendente" && (
-    <span className={`tipo-badge badge-${pedido.tipo}`}>
-
-      {pedido.tipo === "resgate" &&
-        "🚨 Defesa Civil"}
-
-      {pedido.tipo === "alimentacao" &&
-        "🍲 Voluntários"}
-
-      {pedido.tipo === "abrigo" &&
-        "🏠 Abrigo"}
-
-    </span>
-  )}
-
-</div>
+        {pedido.status === "resolvido" &&
+          pedido.data_resolvido && (
+            <div className="data-item">
+              ✅ Resolvido em{" "}
+              {new Date(
+                pedido.data_resolvido
+              ).toLocaleString()}
+            </div>
+          )}
       </div>
 
-      {/* conteúdo */}
-      <div className="pedido-body">
-
-        <p className="pedido-tipo">
-          🆘 {pedido.tipo}
-        </p>
-
-        <p className="pedido-animal">
-          {pedido.tem_animal ? "🐾 Com animal" : "🐾 Sem animal"}
-        </p>
-
-        <hr />
-
-        <p className="pedido-desc">
-          {pedido.descricao}
-        </p>
-
-        {pedido.data_criacao && (
-          <p className="pedido-data">
-            📅 {new Date(pedido.data_criacao).toLocaleDateString()}
-          </p>
-        )}
-      </div>
-
-      {/* botão */}
+      {/* BOTÃO RESOLVER */}
       {pedido.status !== "resolvido" && (
         <button
           className="resolver-btn"
