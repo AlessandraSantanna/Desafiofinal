@@ -90,10 +90,10 @@ export async function atualizarStatus(req, res) {
 
   try {
     const result = await pool.query(
-      `UPDATE pedidos 
-       SET 
+      `UPDATE pedidos
+       SET
          status = 'resolvido',
-         data_resolvido = CURRENT_TIMESTAMP
+         data_resolvido = NOW()
        WHERE id = $1
        RETURNING *`,
       [id]
@@ -115,7 +115,6 @@ export async function atualizarStatus(req, res) {
     });
   }
 }
-
 /* 📌 Listar voluntários por região */
 export async function listarVoluntariosPorRegiao(req, res) {
   try {
