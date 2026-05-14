@@ -7,11 +7,13 @@ import DashboardPage from "./pages/DashboardPage";
 import VoluntarioPage from "./pages/VoluntarioPage";
 import ListaVoluntariosPage from "./pages/ListaVoluntariosPage";
 
+
 function App() {
   return (
     <>
       <Navbar />
     <Routes>
+  
       <Route path="/" element={<LandingPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="/pedidos" element={<PedidosPage />} />

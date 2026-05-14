@@ -90,7 +90,8 @@ export default function PedidoForm({ onNovoPedido }) {
   }
 
   return (
-
+    <>
+ 
     <form
       onSubmit={handleSubmit}
       className="pedido-form"
@@ -151,7 +152,7 @@ export default function PedidoForm({ onNovoPedido }) {
           </option>
 
           <option value="alimentacao">
-            Alimentação
+            Doações
           </option>
 
           <option value="abrigo">
@@ -251,5 +252,6 @@ export default function PedidoForm({ onNovoPedido }) {
       </button>
 
     </form>
+    </>
   );
 }

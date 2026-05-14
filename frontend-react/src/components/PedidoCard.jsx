@@ -1,7 +1,7 @@
 export default function PedidoCard({ pedido, onResolver }) {
   function tipoLabel(tipo) {
     if (tipo === "resgate") return "🆘 Resgate";
-    if (tipo === "alimentacao") return "🍲 Alimentação";
+    if (tipo === "alimentacao") return "🍲 Doações";
     if (tipo === "abrigo") return "🏠 Abrigo";
     return tipo;
   }
@@ -27,6 +27,10 @@ export default function PedidoCard({ pedido, onResolver }) {
             ? "Resolvido"
             : "Pendente"}
         </span>
+      </div>
+      {/* idade */}
+      <div className="info-linha">
+        🕒 {pedido.idade} anos
       </div>
 
       {/* REGIÃO */}

@@ -73,7 +73,7 @@ export default function Dashboard({ stats }) {
     labels: [
       "Abrigo",
       "Resgate",
-      "Alimentação",
+      "Doações",
       
     ],
 
@@ -237,7 +237,7 @@ export default function Dashboard({ stats }) {
       ========================= */}
       <div className="chart-container">
 
-        <h3>📊 Resumo Geral</h3>
+        <h3>📊 Quantitativo de Prioridades</h3>
 
         <Bar
           data={barData}

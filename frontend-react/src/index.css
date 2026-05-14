@@ -69,7 +69,7 @@ color:#000;
 }
 
 .btn-secondary {
-  background: transparent;
+  background: red;
   color: #fff;
   border: 2px solid #fff;
   padding: 14px 24px;
@@ -80,7 +80,8 @@ color:#000;
 }
 
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.2);
+  background: rgb(248, 3, 3);
+  color:black;
 }
 
 .container {
@@ -606,15 +607,16 @@ button:hover {
 }
 /* formulário pagina inicial*/
 
-.pedido-form {
-  max-width: 400px;
-  margin: auto;
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
 
+ .pedido-form {
+  width: 100%;
+  max-width: 650px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
 .form-group {
   margin-bottom: 18px;
   display: flex;

@@ -28,9 +28,10 @@ export async function criarPedido(pedido) {
 
 // ✅ resolver pedido
 export async function resolverPedido(id) {
-  const res = await api.patch(`/pedidos/${id}`, { status: 'resolvido' });
+  const res = await api.put(`/pedidos/${id}/resolver`);
   return res.data;
 }
+
 
 
 // 👇 mock (ok por enquanto)
