@@ -670,7 +670,7 @@ textarea {
 .submit-btn-vol {
   width: 100%;
   padding: 14px;
-  background-color: red;
+  background-color: rgb(235, 31, 31);
   color: white;
   border: none;
   border-radius: 8px;
@@ -691,7 +691,27 @@ textarea {
 .submit-btn:hover {
   background-color: #2c4690;
 }
+.submit-btn-cadastro {
+  width: 100%;
+  padding: 14px;
+  background-color: rgb(235, 31, 31);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  align-items: center;
+  display: flex;
+  flex-direction: column;   /* organiza em coluna */
+  align-items: center;      /* centraliza horizontalmente */
+  justify-content: center;  /* centraliza verticalmente se quiser ocupar a tela */
+  margin: 0 auto;
+  max-width: 600px;         /* largura máxima para não ficar esticado demais */
 
+
+}
 /* Dashboard */
 .dashboard-container {
   padding: 30px;

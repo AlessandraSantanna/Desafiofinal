@@ -250,8 +250,8 @@ export default function PedidoForm({ onNovoPedido }) {
       >
         Cadastrar
       </button>
-
-    </form>
+    </form>  
+  
     </>
   );
 }
