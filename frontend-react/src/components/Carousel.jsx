@@ -1,74 +1,66 @@
-import  { useState } from "react";
+import { useState } from "react";
 import "./Carousel.css";
 
 const steps = [
   {
-    title: "🚨Alerta Solidário - Como funciona",
-    description:
-      "Faça seu pedido de ajuda de acordo com sua idade:", 
-     description1:
-     " 1 - Resgate e Abrigo de idosos e crianças com prioridade alta. ",
-    description2:
-    " 2 - Abrigo - Perioridade Média - para pessoas maiores de 18 anos e menores de 60 anos. ",
-    description3:
-    " 3 - Doações - Prioridade baixa - para pessoas maiores de 18 anos e menores de 60 anos. "
-    },
-  {
-    title: "📊Dashboard ",
-    description1:
-      "Visualize gráficos por Tipos de atendimento, região e prioridade .",
+    title: "🚨 Como funciona",
+    description: "Pedidos priorizados por idade e situação:",
+    items: [
+      "🔴 Resgate e Abrigo — idosos e crianças (prioridade alta)",
+      "🟡 Abrigo — 18 a 60 anos (prioridade média)",
+      "🟢 Doações — 18 a 60 anos (prioridade baixa)",
+    ],
   },
   {
-    title: " 🤝Cadastro de Voluntários",
-    description1:
-      "Cadastre-se informando sua região de atuação e qual ajuda pode oferecer.",
+    title: "📊 Dashboard",
+    description: "Visualize gráficos por tipo de atendimento, região e prioridade.",
+    items: [],
+  },
+  {
+    title: "🤝 Seja Voluntário",
+    description: "Cadastre-se informando sua região e como pode ajudar.",
+    items: [],
   },
 ];
 
 export default function Carousel({ onFinish }) {
   const [index, setIndex] = useState(0);
-
-  const next = () => {
-    if (index < steps.length - 1) {
-      setIndex(index + 1);
-    }
-  };
-
-  const prev = () => {
-    if (index > 0) {
-      setIndex(index - 1);
-    }
-  };
+  const step = steps[index];
 
   return (
     <div className="carousel-overlay">
       <div className="carousel-card">
-        <h2>{steps[index].title}</h2>
-        <h3>{steps[index].description}</h3>
-         <p>{steps[index].description1}</p>
-          <p>{steps[index].description2}</p>
-           <p>{steps[index].description3}</p>
+        <h2>{step.title}</h2>
+        <p className="carousel-desc">{step.description}</p>
+
+        {step.items.length > 0 && (
+          <ul className="carousel-list">
+            {step.items.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        )}
+
         <div className="controls">
-          {index > 0 && <button  className="carousel-btn"  onClick={prev}>◀ Voltar</button>}
+          {index > 0 && (
+            <button className="carousel-btn" onClick={() => setIndex(index - 1)}>
+              ◀ Voltar
+            </button>
+          )}
           {index < steps.length - 1 ? (
-            <button  className="carousel-btn"  onClick={next}>Próximo ▶</button>
+            <button className="carousel-btn" onClick={() => setIndex(index + 1)}>
+              Próximo ▶
+            </button>
           ) : (
-            // botão Finalizar SEMPRE chama a função recebida por props
-                <button
-  className="carousel-btn finish"
-  style={{ pointerEvents: "auto" }}
-  onClick={onFinish}
->
-  Finalizar
-</button>
+            <button className="carousel-btn finish" onClick={onFinish}>
+              Finalizar
+            </button>
           )}
         </div>
+
         <div className="dots">
           {steps.map((_, i) => (
-            <span
-              key={i}
-              className={i === index ? "dot active" : "dot"}
-            ></span>
+            <span key={i} className={i === index ? "dot active" : "dot"} />
           ))}
         </div>
       </div>

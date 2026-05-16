@@ -13,6 +13,7 @@ color:#000;
 }
 .landing-container {
   position: relative;
+
   height: 100vh;
   background: url("/enchente.webp") no-repeat center center;
   background-size: cover;
@@ -92,6 +93,37 @@ color:#000;
   gap: 20px; /* espaçamento entre os cards */
   padding: 20px;
 }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .landing-buttons {
+    flex-direction: column;  /* botões empilhados */
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 280px;
+    font-size: 15px;
+    padding: 12px 20px;
+  }
+
+  .landing-title {
+    font-size: 1.6rem;
+  }
+
+  .landing-text {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+
+  .landing-content {
+    padding: 20px;
+  }
+}
+
 /* =========================
    📦 LISTA DOS CARDS
 ========================= */

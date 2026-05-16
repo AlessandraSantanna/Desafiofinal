@@ -30,7 +30,7 @@ export default function Landing() {
               className="btn-primary" 
               onClick={() => navigate("/cadastro-voluntario")}
             >
-              Quero ser um 
+             
             </button>
             <button 
               className="btn-secondary" 
