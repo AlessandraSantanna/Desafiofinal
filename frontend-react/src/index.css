@@ -565,6 +565,7 @@ button:hover {
     display: none;   /* escondido por padrão */
     padding: 10px;
     z-index: 1;
+    font-size: 15px;
   
   }
   /* Quando passar o mouse no ícone/menu, mostra */

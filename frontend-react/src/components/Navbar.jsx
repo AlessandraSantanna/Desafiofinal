@@ -14,7 +14,7 @@ export default function Navbar() {
       <div className={`nav-links ${open ? "active" : ""}`}>
          <Link to="/">Inicio</Link>
         <Link to="/home">Pedido de ajuda</Link>
-        <Link to="/pedidos">Cadastrados </Link>
+        <Link to="/pedidos">Acompanhar Pedidos</Link>
         <Link to="/dashboard">Dashboard</Link>
          <Link to="/voluntario" className="link-red">Quero ser um Voluntário </Link>
       </div>
