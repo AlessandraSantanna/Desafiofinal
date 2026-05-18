@@ -28,11 +28,13 @@ export async function criarPedido(pedido) {
 
 // ✅ resolver pedido
 export async function resolverPedido(id) {
-  const res = await api.put(`/pedidos/${id}/resolver`);
+
+  const res = await api.put(
+    `/pedidos/${id}/resolver`
+  );
+
   return res.data;
 }
-
-
 
 // 👇 mock (ok por enquanto)
 export async function listarVoluntariosPorRegiao() {
